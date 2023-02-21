@@ -28,6 +28,17 @@ namespace StoreHouse.ViewModels
 
         //Commands
 
+        private RelayCommand _LoadAddIngredientCommand;
+        public RelayCommand LoadAddIngredientCommand
+        {
+            get
+            {
+                return _LoadAddIngredientCommand ?? new RelayCommand(obj =>
+                {
+                    _MainCodeBehind.LoadView(ViewType.AddIngredient);
+                });
+            }
+        }
         /// <summary>
         /// Сообщение пользователю
         /// </summary>

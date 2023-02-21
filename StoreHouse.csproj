@@ -13,6 +13,8 @@
     <None Remove="Images\LogoImage.png" />
     <None Remove="Images\Main page.png" />
     <None Remove="Images\Search image.png" />
+    <None Remove="Images\Иконки.png" />
+    <None Remove="Images\ИконкиBackground.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +35,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Search image.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Иконки.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

@@ -6,35 +6,43 @@
         xmlns:local="clr-namespace:StoreHouse.View.ManageDbPages"
         mc:Ignorable="d"
         d:DesignHeight="700" d:DesignWidth="1060"
-        Background="AliceBlue">
-    <Grid>
+        Background="AliceBlue"
+>
+    <Grid VerticalAlignment="Center" Height="700" Margin="10,0,0,0">
+        <Grid.Background>
+            <ImageBrush Opacity="50" ImageSource="../../Images/Иконки.png"></ImageBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="33*"></RowDefinition>
+            <RowDefinition Height="34*"></RowDefinition>
+            <RowDefinition Height="33*"></RowDefinition>
+            <RowDefinition Height="33*"></RowDefinition>
+            <RowDefinition Height="31*"></RowDefinition>
+            <RowDefinition Height="1"></RowDefinition>
+            <RowDefinition Height="0*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock Margin="30,0,0,0" Grid.Row="0" Grid.Column="0" Foreground="#818181" VerticalAlignment="Center" FontSize="30" FontWeight="Medium">Назва</TextBlock>
-        <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="#F3F3F3" Height="30" Width="400"></TextBox>
+        <TextBlock Margin="30,0,0,0" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="33">Назва</TextBlock>
+        <TextBox VerticalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2" BorderBrush="#000" Height="30" Width="400"/>
 
-        <TextBlock Margin="30,0,0,0" Grid.Row="1" Grid.Column="0" Foreground="#818181" VerticalAlignment="Center" FontSize="30" FontWeight="Medium">Одиниці виміру</TextBlock>
-        <ComboBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="#F3F3F3" Height="30" Width="200"></ComboBox>
+        <TextBlock Margin="30,0,0,0" Grid.Row="1" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="34">Одиниці виміру</TextBlock>
+        <Border HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" BorderThickness="2" BorderBrush="#000" Height="30" Width="200">
+            <ComboBox  VerticalAlignment="Center" Height="30" Width="200"></ComboBox>
 
-        <TextBlock Margin="30,0,0,0" Grid.Row="2" Grid.Column="0" Foreground="#818181" VerticalAlignment="Center" FontSize="30" FontWeight="Medium">Кількість залишків</TextBlock>
-        <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="#F3F3F3" Height="30" Width="400"></TextBox>
+        </Border>
 
-        <TextBlock Margin="30,0,0,0" Grid.Row="3" Grid.Column="0" Foreground="#818181" VerticalAlignment="Center" FontSize="30" FontWeight="Medium">Собівартість </TextBlock>
-        <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderBrush="#F3F3F3" Height="30" Width="400"></TextBox>
+        <TextBlock Margin="30,0,0,0" Grid.Row="2" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="33">Кількість залишків</TextBlock>
+        <TextBox VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2" BorderBrush="#000" Height="30" Width="400"></TextBox>
 
-        <StackPanel  Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button BorderThickness="1" BorderBrush="#F3F3F3" FontSize="20" FontWeight="Medium" Background="#30BCC5" Width="200">Додати Інгредієнт</Button>
-            <Button BorderThickness="1" BorderBrush="#F3F3F3" FontSize="20" FontWeight="Medium" Background="#30BCC5" Width="200" Margin="30,0,0,0">Відмінити</Button>
+        <TextBlock Margin="30,0,0,0" Grid.Row="3" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="33">Собівартість</TextBlock>
+        <TextBox VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2" BorderBrush="#000" Height="30" Width="400"></TextBox>
+
+        <StackPanel  Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="315,0,0,1" Grid.RowSpan="2" Width="430">
+            <Button Height="50" BorderThickness="1" BorderBrush="#F3F3F3" FontSize="20" FontWeight="Medium" Background="#30BCC5" Width="200">Додати Інгредієнт</Button>
+            <Button Height="50" BorderThickness="1" BorderBrush="#F3F3F3" FontSize="20" FontWeight="Medium" Background="#30BCC5" Width="200" Margin="30,0,0,0">Відмінити</Button>
         </StackPanel>
     </Grid>
 </UserControl>

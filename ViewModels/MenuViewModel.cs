@@ -111,17 +111,6 @@ namespace StoreHouse.ViewModels
             }
         }
 
-        private RelayCommand _LoadAddIngredientCommand;
-        public RelayCommand LoadAddIngredientCommand
-        {
-            get
-            {
-                return _LoadAddIngredientCommand ?? new RelayCommand(obj =>
-                {
-                    CodeBehind.LoadView(ViewType.AddIngredient);
-                });
-            }
-        }
 
         #region INotifyPropertyChanged Implementation
         public event PropertyChangedEventHandler PropertyChanged;
