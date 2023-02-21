@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="StoreHouse.View.IngredientsUC"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StoreHouse.View"
+        mc:Ignorable="d"
+        d:DesignHeight="768" d:DesignWidth="1060"
+        Background="AliceBlue">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6.97*"></RowDefinition>
+            <RowDefinition Height="10.76*"></RowDefinition>
+            <RowDefinition Height="82.27*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="10" Orientation="Horizontal" Grid.Row="0">
+            <TextBlock VerticalAlignment="Center" FontWeight="Regular" FontSize="20">Інгредієнти</TextBlock>
+            <TextBlock Margin="9,3,0,0" VerticalAlignment="Center" Foreground="#ACACAC" FontSize="16">51</TextBlock>
+        </StackPanel>
+        <StackPanel Margin="10" Orientation="Horizontal" Grid.Row="1">
+            <Button Height="30" Width="30" Background="White">
+                <Image Height="25" Width="25" Source="../../Images/Search image.png"/>
+            </Button>
+            <TextBox Height="30" Width="164"/>
+            <Button BorderThickness="0" Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Од. Виміру</Button>
+            <Button BorderThickness="0" Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Фільтр</Button>
+            <Button Command="{Binding LoadAddIngredientCommand, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" BorderBrush="#30BCC5" Background="Transparent" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="470,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Додати інгредієнт</Button>
+            
+        </StackPanel>
+        <ScrollViewer  Grid.Row="2">
+            <DataGrid Foreground="#818181" FontSize="16" FontWeight="Medium" x:Name="IngredientsDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Header="Назва"></DataGridTextColumn>
+                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Unit, UpdateSourceTrigger=PropertyChanged}" Header="Од. Виміру"></DataGridTextColumn>
+                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding CurrentRemains, UpdateSourceTrigger=PropertyChanged}" Header="Залишки на складі"></DataGridTextColumn>
+                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding PrimeCost, UpdateSourceTrigger=PropertyChanged}" Header="Собівартість"></DataGridTextColumn>
+                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Sum, UpdateSourceTrigger=PropertyChanged}" Header="Сума залишку"></DataGridTextColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button BorderThickness="0" Background="Transparent" FontSize="16" FontWeight="Medium" Foreground="#30BCC5" Content="Редагувати"></Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
