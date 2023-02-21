@@ -9,9 +9,8 @@ namespace StoreHouse.Model.DbContext.Methods
 {
     internal interface IAddToDb
     {
-        string AddRemain(string name, string type, string category, Ingredient currentRemains, decimal primeCost, decimal sum);
         string AddDish(string name, string type, string category, double currentRemains, decimal primeCost);
-        string AddIngredient(string name, string unit, double currentRemains, decimal primeCost, decimal sum);
+        string AddIngredient(string name, string unit, string currentRemains, decimal primeCost, decimal sum, string type);
         string AddSupply(int ingredientId, DateTime date, string supplier, Ingredient product, string Comment, decimal sum);
         string AddWriteOff(DateTime date, Ingredient product, double currentRemains, decimal sum, string cause);
 

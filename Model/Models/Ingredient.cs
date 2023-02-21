@@ -14,6 +14,8 @@ namespace StoreHouse.Model.Models
         public string CurrentRemains { get; set; }
         public decimal PrimeCost { get; set; }
         public decimal Sum { get; set; }
+        public string Type { get; set; }
+
 
     }
 }

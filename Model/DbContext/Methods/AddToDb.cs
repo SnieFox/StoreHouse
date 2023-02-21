@@ -9,35 +9,31 @@ namespace StoreHouse.Model.DbContext.Methods
 {
     internal class AddToDb : IAddToDb
     {
-        public string AddRemain(string name, string type, string category, Ingredient currentRemains, decimal primeCost, decimal sum)
-        {
-            string result = "Готово!";
-            using (StoreHouseContext db = new StoreHouseContext())
-            {
-                Remain remain = new Remain()
-                {
-                    Name = name,
-                    Type = type,
-                    Category = category,
-                    CurrentRemains = currentRemains.CurrentRemains,
-                    PrimeCost = primeCost,
-                    Sum = sum
-                };
-                db.Remains.Add(remain);
-                db.SaveChanges();
-            }
-
-            return result;
-        }
-
         public string AddDish(string name, string type, string category, double currentRemains, decimal primeCost)
         {
             throw new NotImplementedException();
         }
 
-        public string AddIngredient(string name, string unit, double currentRemains, decimal primeCost, decimal sum)
+        public string AddIngredient(string name, string unit, string currentRemains, decimal primeCost, decimal sum, string type)
         {
-            throw new NotImplementedException();
+            string result = "Готово!";
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                Ingredient ingredient = new Ingredient()
+                {
+                    Name = name,
+                    Unit = unit,
+                    CurrentRemains = currentRemains,
+                    PrimeCost = primeCost,
+                    Sum = sum,
+                    Type = type
+
+                };
+                db.Ingredients.Add(ingredient);
+                db.SaveChanges();
+            }
+
+            return result;
         }
 
         public string AddSupply(int ingredientId, DateTime date, string supplier, Ingredient product, string Comment, decimal sum)

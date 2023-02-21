@@ -10,14 +10,6 @@ namespace StoreHouse.Model.DbContext
 {
     internal class DbUsage
     {
-        public static List<Remain> GetAllRemains()
-        {
-            using (StoreHouseContext db = new StoreHouseContext())
-            {
-                var remains = db.Remains.ToList();
-                return remains;
-            }
-        }
         public static List<Dish> GetAllDishes()
         {
             using (StoreHouseContext db = new StoreHouseContext())

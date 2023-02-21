@@ -18,7 +18,6 @@ namespace StoreHouse.Model
 
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Dish> Dishes { get; set; }
-        public DbSet<Remain> Remains { get; set; }
         public DbSet<Supply> Supplies { get; set; }
         public DbSet<WriteOff> WriteOffs { get; set; }
 
