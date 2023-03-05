@@ -25,6 +25,7 @@
             <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Постачальник</TextBlock>
             <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Категорія</TextBlock>
             <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Фільтр</TextBlock>
+            <Button Command="{Binding LoadAddSupplyCommand, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" BorderBrush="#30BCC5" Background="Transparent" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="350,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Додати постачання</Button>
         </StackPanel>
         <ScrollViewer  Grid.Row="2">
             <DataGrid Foreground="#818181" FontSize="16" FontWeight="Medium" x:Name="SuppliesDataGrid" AutoGenerateColumns="False" IsReadOnly="True">

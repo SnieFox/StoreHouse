@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using StoreHouse.Model.Models;
@@ -34,6 +36,19 @@ namespace StoreHouse.Model.DbContext
                 return supplies;
             }
         }
+
+        public static int GetSupplyIdByName(string name)
+        {
+            int id;
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                id = (from ingredient in db.Ingredients
+                      where ingredient.Name ==name
+                          select ingredient.Id).FirstOrDefault();
+            }
+
+            return id;
+        }
         public static List<WriteOff> GetAllWriteOffs()
         {
             using (StoreHouseContext db = new StoreHouseContext())
@@ -41,6 +56,44 @@ namespace StoreHouse.Model.DbContext
                 var writeOffs = db.WriteOffs.ToList();
                 return writeOffs;
             }
+        }
+
+        public static List<string> GetProductNames()
+        {
+            List<string> productNamesList = new List<string>();
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                productNamesList = (from ingredient in db.Ingredients
+                    select ingredient.Name).ToList();
+            }
+
+            return productNamesList;
+        }
+
+        public static decimal GetSum(string primeCost, string currentRemains)
+        {
+            decimal sum = 0;
+            if (primeCost != null)
+            {
+                sum = Convert.ToDecimal(primeCost.Replace('.', ',')) * Convert.ToDecimal(currentRemains.Replace('.', ','));
+                return sum;
+            }
+
+            return sum;
+        }
+        public static string GetPrimeCost(decimal sum, string currentRemains)
+        {
+            try
+            {
+                string primeCost = "";
+                primeCost = Convert.ToString(Math.Round(sum / Convert.ToDecimal(currentRemains.Replace('.', ',')),2));
+                return primeCost;
+            }
+            catch (NullReferenceException e)
+            {
+                return "";
+            }
+
         }
 
     }

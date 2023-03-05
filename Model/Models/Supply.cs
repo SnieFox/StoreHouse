@@ -10,7 +10,7 @@ namespace StoreHouse.Model.Models
     {
          public int Id { get; set; }
          public int IngredientId { get; set; }
-         public DateTime Date { get; set; }
+         public string Date { get; set; }
          public string Supplier { get; set; }
          public string Product { get; set; }
          public string Comment { get; set; }

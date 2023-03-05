@@ -42,4 +42,8 @@
     </Resource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\ManadeDbViewModels\Methods\" />
+  </ItemGroup>
+
 </Project>

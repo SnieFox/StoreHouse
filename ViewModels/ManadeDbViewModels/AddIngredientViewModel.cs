@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using StoreHouse.Model.DbContext;
 
 namespace StoreHouse.ViewModels.ManadeDbViewModels
 {
@@ -106,11 +107,11 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
             }
         }
 
-        public decimal GetSum( string primeCost, string currentRemains)
-        {
-            decimal sum = Convert.ToDecimal(primeCost.Replace('.', ',')) * Convert.ToDecimal(currentRemains.Replace('.',','));
-            return sum;
-        }
+        //public decimal GetSum( string primeCost, string currentRemains)
+        //{
+        //    decimal sum = Convert.ToDecimal(primeCost.Replace('.', ',')) * Convert.ToDecimal(currentRemains.Replace('.',','));
+        //    return sum;
+        //}
 
         //Commands
         private RelayCommand _AddIngredientCommand;
@@ -128,7 +129,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
                             _SelectedUnit,
                             $"{_CurrentRemains} {_SelectedUnit}",
                             Convert.ToDecimal(_PrimeCost.Replace('.', ',')),
-                            GetSum(_PrimeCost,_CurrentRemains),
+                            DbUsage.GetSum(_PrimeCost,_CurrentRemains),
                             _SelectedType);
                             _MainCodeBehind.LoadView(ViewType.Ingredients);
                     }

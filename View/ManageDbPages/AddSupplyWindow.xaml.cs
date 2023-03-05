@@ -1,7 +1,5 @@
-﻿using StoreHouse.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,19 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace StoreHouse.View
+namespace StoreHouse.View.ManageDbPages
 {
     /// <summary>
-    /// Логика взаимодействия для SuppliesUC.xaml
+    /// Логика взаимодействия для AddSupplyWindow.xaml
     /// </summary>
-    public partial class SuppliesUC
+    public partial class AddSupplyWindow
     {
-        public SuppliesUC()
+        public AddSupplyWindow()
         {
             InitializeComponent();
-            var temp = StoreHouseContext.GetContext().Supplies.ToList();
-            SuppliesDataGrid.ItemsSource = temp;
-
         }
     }
 }

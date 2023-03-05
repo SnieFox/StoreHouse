@@ -27,7 +27,17 @@ namespace StoreHouse.ViewModels
         //Properties
 
         //Commands
-
+        private RelayCommand _LoadAddSupplyCommand;
+        public RelayCommand LoadAddSupplyCommand
+        {
+            get
+            {
+                return _LoadAddSupplyCommand ?? new RelayCommand(obj =>
+                {
+                    _MainCodeBehind.LoadView(ViewType.AddSupply);
+                });
+            }
+        }
         /// <summary>
         /// Сообщение пользователю
         /// </summary>

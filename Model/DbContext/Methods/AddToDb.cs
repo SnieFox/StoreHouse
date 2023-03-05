@@ -36,9 +36,35 @@ namespace StoreHouse.Model.DbContext.Methods
             return result;
         }
 
-        public string AddSupply(int ingredientId, DateTime date, string supplier, Ingredient product, string Comment, decimal sum)
+        public string AddSupply(int ingredientId, string date, string supplier, string product, string count, string comment, decimal sum)
         {
-            throw new NotImplementedException();
+            string result = "Готово!";
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                Supply supply = new Supply()
+                {
+                    IngredientId = ingredientId,
+                    Date = date,
+                    Supplier = supplier,
+                    Product = product,
+                    Comment = comment,
+                    Sum = sum
+                };
+                db.Supplies.Add(supply);
+                var ingr = (from ingredient in db.Ingredients
+                            where ingredient.Id == ingredientId
+                                select ingredient);
+                foreach (var id in ingr)
+                {
+                    string[] tempRemainsSplit = id.CurrentRemains.Split(' ');
+                    decimal tempRemains = Convert.ToDecimal(tempRemainsSplit[0].Replace('.', ','));
+                    id.CurrentRemains = Convert.ToString(tempRemains + Convert.ToDecimal(count));
+                    id.Sum = DbUsage.GetSum(Convert.ToString(id.PrimeCost), id.CurrentRemains);
+                }
+                db.SaveChanges();
+            }
+
+            return result;
         }
 
         public string AddWriteOff(DateTime date, Ingredient product, double currentRemains, decimal sum, string cause)
