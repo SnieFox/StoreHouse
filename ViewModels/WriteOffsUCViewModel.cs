@@ -27,7 +27,17 @@ namespace StoreHouse.ViewModels
         //Properties
 
         //Commands
-
+        private RelayCommand _LoadAddWriteOffCommand;
+        public RelayCommand LoadAddWriteOffCommand
+        {
+            get
+            {
+                return _LoadAddWriteOffCommand ?? new RelayCommand(obj =>
+                {
+                    _MainCodeBehind.LoadView(ViewType.AddWriteOff);
+                });
+            }
+        }
         /// <summary>
         /// Сообщение пользователю
         /// </summary>

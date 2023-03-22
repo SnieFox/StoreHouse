@@ -1,8 +1,5 @@
-﻿using StoreHouse.Model;
-using StoreHouse.Model.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,17 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace StoreHouse.View
+namespace StoreHouse.View.ManageDbPages
 {
     /// <summary>
-    /// Логика взаимодействия для WriteOffsUC.xaml
+    /// Логика взаимодействия для AddWriteOffWindow.xaml
     /// </summary>
-    public partial class WriteOffsUC
+    public partial class AddWriteOffWindow
     {
-        public WriteOffsUC()
+        public AddWriteOffWindow()
         {
             InitializeComponent();
-            WriteOffsDataGrid.ItemsSource = StoreHouseContext.GetContext().WriteOffs.ToList();
         }
     }
 }

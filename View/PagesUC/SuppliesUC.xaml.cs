@@ -24,8 +24,7 @@ namespace StoreHouse.View
         public SuppliesUC()
         {
             InitializeComponent();
-            var temp = StoreHouseContext.GetContext().Supplies.ToList();
-            SuppliesDataGrid.ItemsSource = temp;
+            SuppliesDataGrid.ItemsSource = StoreHouseContext.GetContext().Supplies.ToList();
 
         }
     }

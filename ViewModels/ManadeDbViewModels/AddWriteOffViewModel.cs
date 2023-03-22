@@ -1,7 +1,7 @@
 ﻿using StoreHouse.Model;
 using StoreHouse.Model.Commands;
+using StoreHouse.Model.DbContext;
 using StoreHouse.Model.DbContext.Methods;
-using StoreHouse.Model.Models;
 using StoreHouse.ViewModels.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,15 +11,14 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using StoreHouse.Model.DbContext;
 
 namespace StoreHouse.ViewModels.ManadeDbViewModels
 {
-    internal class AddSupplyViewModel : INotifyPropertyChanged
+    internal class AddWriteOffViewModel : INotifyPropertyChanged
     {
         private IMainWindowsCodeBehind _MainCodeBehind;
 
-        public AddSupplyViewModel(IMainWindowsCodeBehind codeBehind)
+        public AddWriteOffViewModel(IMainWindowsCodeBehind codeBehind)
         {
             if (codeBehind == null) throw new ArgumentNullException(nameof(codeBehind));
 
@@ -27,14 +26,13 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
         }
         //Methods
         //Fields
-        public int temp = 0;
-        private static string _Comment;
-        public string Comment
+        private static string _Cause;
+        public string Cause
         {
-            get => _Comment;
+            get => _Cause;
             set
             {
-                _Comment = value;
+                _Cause = value;
                 OnPropertyChanged();
             }
         }
@@ -46,62 +44,22 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
             set
             {
                 _Count = value;
+                Sum = DbUsage.GetSum(DbUsage.GetPrimeCost(DbUsage.GetIngredientIdByName(SeletedProduct), SeletedProduct), _Count);
                 OnPropertyChanged();
-            }
-        }
-
-        private static string _PrimeCost;
-        public string PrimeCost
-        {
-            get
-            {
-                return _PrimeCost;
-            }
-            set
-            {
-                if (temp==0)
-                {
-                    temp++;
-                    _PrimeCost = value;
-                    OnPropertyChanged();
-                    Sum = DbUsage.GetSum(_PrimeCost, _Count);
-                    
-                }
-                else
-                {
-                    _PrimeCost = value;
-                    OnPropertyChanged();
-                    temp = 0;
-                }
             }
         }
 
         private static decimal _Sum;
         public decimal Sum
         {
-            get
-            {
-                return _Sum;
-            }
+            get => _Sum;
             set
             {
-                if (temp == 0)
-                {
-                    temp++;
-                    _Sum = value;
-                    OnPropertyChanged();
-                    PrimeCost = DbUsage.GetPrimeCost(_Sum, _Count);
-
-                }
-                else
-                {
-                    _Sum = value;
-                    OnPropertyChanged();
-                    temp = 0;
-                }
-
+                _Sum = value;
+                OnPropertyChanged();
             }
         }
+
         //Combobox ProductList
         private List<string> _ProductList = DbUsage.GetProductNames();
 
@@ -123,50 +81,29 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
                 OnPropertyChanged();
             }
         }
-        //Combobox SupplierList
-        private List<string> _SupplierList = new() { "Маркет", "Столичний ринок", "МЕТРО" };
 
-        public List<string> SupplierList
-        {
-            get => _SupplierList;
-            set
-            {
-                _SupplierList = value;
-            }
-        }
-        private string _SeletedSupplier;
-        public string SeletedSupplier
-        {
-            get => _SeletedSupplier;
-            set
-            {
-                _SeletedSupplier = value;
-                OnPropertyChanged();
-            }
-        }
 
         // Commands
-        // Комманда добавления Поставки
-        private RelayCommand _AddSupplyCommand;
-        public RelayCommand AddSupplyCommand
+        // Комманда добавления Списания
+        private RelayCommand _AddWriteOffCommand;
+        public RelayCommand AddWriteOffCommand
         {
             get
             {
-                return _AddSupplyCommand ?? new RelayCommand(obj =>
+                return _AddWriteOffCommand ?? new RelayCommand(obj =>
                 {
                     try
                     {
                         AddToDb addToDb = new AddToDb();
-                        addToDb.AddSupply(
+                        addToDb.AddWriteOff(
                             DbUsage.GetIngredientIdByName(SeletedProduct),
                             DateTime.Now.ToString("dd/MM/yyyy HH:mm"),
-                            SeletedSupplier,
                             SeletedProduct,
                             Count,
-                            Comment,
-                            Sum
+                            Sum,
+                            Cause
                         );
-                        _MainCodeBehind.LoadView(ViewType.Supplies);
+                        _MainCodeBehind.LoadView(ViewType.WriteOffs);
                     }
                     catch (Exception e)
                     {
@@ -176,22 +113,21 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
                 });
             }
         }
-        /// Переход ко Supplies вьюшке
-        private RelayCommand _LoadSuppliesUCCommand;
-        public RelayCommand LoadSuppliesUCCommand
+        /// Переход ко WriteOff вьюшке
+        private RelayCommand _LoadWriteOffUCCommand;
+        public RelayCommand LoadWriteOffUCCommand
         {
             get
             {
                 Count = "";
                 Sum = 0;
-                PrimeCost = "";
-                return _LoadSuppliesUCCommand ?? new RelayCommand(obj =>
+                Cause = "";
+                return _LoadWriteOffUCCommand ?? new RelayCommand(obj =>
                 {
-                    _MainCodeBehind.LoadView(ViewType.Supplies);
+                    _MainCodeBehind.LoadView(ViewType.WriteOffs);
                 });
             }
         }
-
 
         #region INotifyPropertyChanged Implementation
         public event PropertyChangedEventHandler PropertyChanged;

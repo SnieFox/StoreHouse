@@ -32,7 +32,8 @@ namespace StoreHouse
         Dishes,
         Ingredients,
         AddIngredient,
-        AddSupply
+        AddSupply,
+        AddWriteOff
     }
     public partial class MainWindow : Window, IMainWindowsCodeBehind
     {
@@ -109,6 +110,12 @@ namespace StoreHouse
                     AddSupplyViewModel vmAddSupply = new AddSupplyViewModel(this);
                     viewAddSupply.DataContext = vmAddSupply;
                     this.OutputView.Content = viewAddSupply;
+                    break;
+                case ViewType.AddWriteOff:
+                    AddWriteOffWindow viewAddWriteOff = new AddWriteOffWindow();
+                    AddWriteOffViewModel vmAddWriteOff = new AddWriteOffViewModel(this);
+                    viewAddWriteOff.DataContext = vmAddWriteOff;
+                    this.OutputView.Content = viewAddWriteOff;
                     break;
             }
 

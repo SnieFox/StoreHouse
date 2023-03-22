@@ -25,14 +25,15 @@
             <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Категорія</TextBlock>
             <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Причина</TextBlock>
             <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Фільтр</TextBlock>
+            <Button Command="{Binding LoadAddWriteOffCommand, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" BorderBrush="#30BCC5" Background="Transparent" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="390,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Додати списання</Button>
         </StackPanel>
         <ScrollViewer  Grid.Row="2">
             <DataGrid Foreground="#818181" FontSize="16" FontWeight="Medium" x:Name="WriteOffsDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Date, UpdateSourceTrigger=PropertyChanged}" Header="№"></DataGridTextColumn>
-                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Product, UpdateSourceTrigger=PropertyChanged}" Header="Назва"></DataGridTextColumn>
-                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Sum, UpdateSourceTrigger=PropertyChanged}" Header="Дата"></DataGridTextColumn>
-                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Cause, UpdateSourceTrigger=PropertyChanged}" Header="Дата"></DataGridTextColumn>
+                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Date, UpdateSourceTrigger=PropertyChanged}" Header="Дата"></DataGridTextColumn>
+                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Product, UpdateSourceTrigger=PropertyChanged}" Header="Товар"></DataGridTextColumn>
+                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Sum, UpdateSourceTrigger=PropertyChanged}" Header="Сума"></DataGridTextColumn>
+                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Cause, UpdateSourceTrigger=PropertyChanged}" Header="Причина"></DataGridTextColumn>
                    <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

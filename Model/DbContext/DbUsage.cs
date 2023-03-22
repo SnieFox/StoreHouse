@@ -37,7 +37,7 @@ namespace StoreHouse.Model.DbContext
             }
         }
 
-        public static int GetSupplyIdByName(string name)
+        public static int GetIngredientIdByName(string name)
         {
             int id;
             using (StoreHouseContext db = new StoreHouseContext())
@@ -87,6 +87,29 @@ namespace StoreHouse.Model.DbContext
             {
                 string primeCost = "";
                 primeCost = Convert.ToString(Math.Round(sum / Convert.ToDecimal(currentRemains.Replace('.', ',')),2));
+                return primeCost;
+            }
+            catch (NullReferenceException e)
+            {
+                return "";
+            }
+
+        }
+        public static string GetPrimeCost(int ingredientId, string SeletedProduct)
+        {
+            try
+            {
+                string primeCost = "";
+                using (StoreHouseContext db = new StoreHouseContext())
+                {
+                    var primeCostList = (from ingredient in db.Ingredients
+                        where ingredient.Id == DbUsage.GetIngredientIdByName(SeletedProduct)
+                        select ingredient.PrimeCost);
+                    foreach (var pc in primeCostList)
+                    {
+                        primeCost += pc.ToString();
+                    }
+                }
                 return primeCost;
             }
             catch (NullReferenceException e)
