@@ -31,7 +31,6 @@
             <DataGrid Foreground="#818181" FontSize="16" FontWeight="Medium" x:Name="SuppliesDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="№"></DataGridTextColumn>
-                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Header="Назва"></DataGridTextColumn>
                     <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Date, UpdateSourceTrigger=PropertyChanged}" Header="Дата"></DataGridTextColumn>
                     <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Supplier, UpdateSourceTrigger=PropertyChanged}" Header="Постачальник"></DataGridTextColumn>
                     <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Product, UpdateSourceTrigger=PropertyChanged}" Header="Товари"></DataGridTextColumn>

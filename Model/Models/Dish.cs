@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StoreHouse.Model.OutputDataModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,12 +10,18 @@ namespace StoreHouse.Model.Models
     class Dish
     {
         public int Id { get; set; }
-        public int IngredientId { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
         public string Category { get; set; }
         public decimal PrimeCost { get; set; }
         public decimal Sum { get; set; }
+        public List<OutputAddDish> IngredientsList { get; set; }
+
+        public Dish()
+        {
+            IngredientsList = new List<OutputAddDish>();
+
+        }
 
 
     }

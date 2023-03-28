@@ -107,12 +107,6 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
             }
         }
 
-        //public decimal GetSum( string primeCost, string currentRemains)
-        //{
-        //    decimal sum = Convert.ToDecimal(primeCost.Replace('.', ',')) * Convert.ToDecimal(currentRemains.Replace('.',','));
-        //    return sum;
-        //}
-
         //Commands
         private RelayCommand _AddIngredientCommand;
         public RelayCommand AddIngredientCommand
@@ -128,15 +122,14 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
                             _Name,
                             _SelectedUnit,
                             $"{_CurrentRemains} {_SelectedUnit}",
-                            Convert.ToDecimal(_PrimeCost.Replace('.', ',')),
-                            DbUsage.GetSum(_PrimeCost,_CurrentRemains),
+                            Math.Round(Convert.ToDecimal(_PrimeCost.Replace('.', ',')), 2),
+                            Math.Round(DbUsage.GetSum(_PrimeCost, _CurrentRemains), 2),
                             _SelectedType);
                             _MainCodeBehind.LoadView(ViewType.Ingredients);
                     }
                     catch (Exception e)
                     {
                         MessageBox.Show("Щось пішло не так! Перевірте правильність заповнення форми.");
-                        throw;
                     }
                 });
             }

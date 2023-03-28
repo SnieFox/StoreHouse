@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using StoreHouse.Model.Models;
+using StoreHouse.Model.OutputDataModels;
 
 namespace StoreHouse.Model
 {
@@ -20,6 +21,7 @@ namespace StoreHouse.Model
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<Supply> Supplies { get; set; }
         public DbSet<WriteOff> WriteOffs { get; set; }
+        public DbSet<OutputAddDish> OutputAddDishes { get; set; }
 
 
         private static StoreHouseContext _Context;

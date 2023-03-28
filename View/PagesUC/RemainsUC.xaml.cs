@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using StoreHouse.Model;
+using StoreHouse.ViewModels.ViewSettingMethods;
 
 namespace StoreHouse.View
 {
@@ -24,7 +25,7 @@ namespace StoreHouse.View
         public RemainsUC()
         {
             InitializeComponent();
-            RemainsDataGrid.ItemsSource = StoreHouseContext.GetContext().Ingredients.ToList();
+            RemainsDataGrid.ItemsSource = ViewSettings.GetOutputIngredients();
         }
     }
 }

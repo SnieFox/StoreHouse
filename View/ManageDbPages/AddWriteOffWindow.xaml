@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:StoreHouse.View.ManageDbPages"
         mc:Ignorable="d"
         d:DesignHeight="700" d:DesignWidth="1060"
         Background="AliceBlue">
@@ -40,8 +39,8 @@
         </Border>
 
         <StackPanel  Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="315,1,0,-1" Width="430">
-            <Button Command="{Binding AddWriteOffCommand, UpdateSourceTrigger=PropertyChanged}" Height="50" BorderThickness="1" BorderBrush="#F3F3F3" FontSize="20" FontWeight="Medium" Background="#30BCC5" Width="200">Додати Постачання</Button>
-            <Button Command="{Binding LoadWriteOffUCCommand, UpdateSourceTrigger=PropertyChanged}" Height="50" BorderThickness="1" BorderBrush="#F3F3F3" FontSize="20" FontWeight="Medium" Background="#30BCC5" Width="200" Margin="30,0,0,0">Відмінити</Button>
+            <Button Command="{Binding AddWriteOffCommand, UpdateSourceTrigger=PropertyChanged}" Height="50" BorderThickness="1" BorderBrush="#F3F3F3" FontSize="20" FontWeight="Medium" Background="#30BCC5" Width="200">Додати Списання</Button>
+            <Button Command="{Binding LoadWriteOffsUCCommand, UpdateSourceTrigger=PropertyChanged }" Height="50" BorderThickness="1" BorderBrush="#F3F3F3" FontSize="20" FontWeight="Medium" Background="#30BCC5" Width="200" Margin="30,0,0,0">Відмінити</Button>
         </StackPanel>
     </Grid>
 </UserControl>

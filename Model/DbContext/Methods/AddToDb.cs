@@ -4,14 +4,51 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StoreHouse.Model.Models;
+using StoreHouse.Model.OutputDataModels;
 
 namespace StoreHouse.Model.DbContext.Methods
 {
     internal class AddToDb : IAddToDb
     {
-        public string AddDish(string name, string type, string category, double currentRemains, decimal primeCost)
+        public string AddOutputAddDish(int dishId, string name, string count, string sum)
         {
-            throw new NotImplementedException();
+            string result = "Готово!";
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                OutputAddDish outputAddDish = new OutputAddDish()
+                {
+                    DishId = dishId,
+                    Name = name,
+                    Count = count,
+                    Sum = sum
+
+                };
+                db.OutputAddDishes.Add(outputAddDish);
+                db.SaveChanges();
+            }
+
+            return result;
+        }
+
+        public string AddDish(string name, string type, string category, decimal primeCost, decimal sum, List<OutputAddDish> ingredientsList)
+        {
+            string result = "Готово!";
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                Dish dish = new Dish()
+                {
+                    Name = name,
+                    Type = type,
+                    Category = category,
+                    PrimeCost = primeCost,
+                    Sum = sum,
+                    IngredientsList = ingredientsList
+                };
+                db.Dishes.Add(dish);
+                db.SaveChanges();
+            }
+
+            return result;
         }
 
         public string AddIngredient(string name, string unit, string currentRemains, decimal primeCost, decimal sum, string type)
@@ -59,7 +96,7 @@ namespace StoreHouse.Model.DbContext.Methods
                     string[] tempRemainsSplit = id.CurrentRemains.Split(' ');
                     decimal tempRemains = Convert.ToDecimal(tempRemainsSplit[0].Replace('.', ','));
                     id.CurrentRemains = Convert.ToString(tempRemains + Convert.ToDecimal(count));
-                    id.Sum = DbUsage.GetSum(Convert.ToString(id.PrimeCost), id.CurrentRemains);
+                    id.Sum = Math.Round(DbUsage.GetSum(Convert.ToString(id.PrimeCost), id.CurrentRemains),2);
                 }
                 db.SaveChanges();
             }
@@ -90,7 +127,7 @@ namespace StoreHouse.Model.DbContext.Methods
                     string[] tempRemainsSplit = id.CurrentRemains.Split(' ');
                     decimal tempRemains = Convert.ToDecimal(tempRemainsSplit[0].Replace('.', ','));
                     id.CurrentRemains = Convert.ToString(tempRemains - Convert.ToDecimal(count.Replace('.', ',')));
-                    id.Sum = DbUsage.GetSum(Convert.ToString(id.PrimeCost), id.CurrentRemains);
+                    id.Sum = Math.Round(DbUsage.GetSum(Convert.ToString(id.PrimeCost), id.CurrentRemains), 2);
                 }
                 db.SaveChanges();
             }

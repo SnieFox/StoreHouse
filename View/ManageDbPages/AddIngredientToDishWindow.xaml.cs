@@ -1,7 +1,5 @@
-﻿using StoreHouse.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,21 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using StoreHouse.ViewModels.ViewSettingMethods;
 
-namespace StoreHouse.View
+namespace StoreHouse.View.ManageDbPages
 {
     /// <summary>
-    /// Логика взаимодействия для SuppliesUC.xaml
+    /// Логика взаимодействия для AddIngredientToDishWindow.xaml
     /// </summary>
-    public partial class SuppliesUC
+    public partial class AddIngredientToDishWindow : UserControl
     {
-        public SuppliesUC()
+        public AddIngredientToDishWindow()
         {
             InitializeComponent();
-            SuppliesDataGrid.ItemsSource = ViewSettings.GetOutputSupplies();
-
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using StoreHouse.Model;
+using StoreHouse.ViewModels.ViewSettingMethods;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,7 +25,7 @@ namespace StoreHouse.View
         public DishesUC()
         {
             InitializeComponent();
-            DishesDataGrid.ItemsSource = StoreHouseContext.GetContext().Dishes.ToList();
+            DishesDataGrid.ItemsSource = ViewSettings.GetOutputDishes();
 
         }
     }

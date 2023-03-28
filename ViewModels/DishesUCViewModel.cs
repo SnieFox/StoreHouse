@@ -27,7 +27,17 @@ namespace StoreHouse.ViewModels
         //Properties
 
         //Commands
-
+        private RelayCommand _LoadAddDishCommand;
+        public RelayCommand LoadAddDishCommand
+        {
+            get
+            {
+                return _LoadAddDishCommand ?? new RelayCommand(obj =>
+                {
+                    _MainCodeBehind.LoadView(ViewType.AddDish);
+                });
+            }
+        }
         /// <summary>
         /// Сообщение пользователю
         /// </summary>

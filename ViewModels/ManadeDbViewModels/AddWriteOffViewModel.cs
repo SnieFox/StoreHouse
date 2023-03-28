@@ -114,20 +114,36 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
             }
         }
         /// Переход ко WriteOff вьюшке
-        private RelayCommand _LoadWriteOffUCCommand;
-        public RelayCommand LoadWriteOffUCCommand
+
+        private RelayCommand _LoadWriteOffsUCCommand;
+        public RelayCommand LoadWriteOffsUCCommand
         {
             get
             {
-                Count = "";
-                Sum = 0;
-                Cause = "";
-                return _LoadWriteOffUCCommand ?? new RelayCommand(obj =>
+                return _LoadWriteOffsUCCommand ?? new RelayCommand(obj =>
                 {
+                    _Count = "";
+                    _Sum = 0;
+                    _Cause = "";
                     _MainCodeBehind.LoadView(ViewType.WriteOffs);
                 });
             }
         }
+
+        //private RelayCommand _LoadWriteOffsUCCommand;
+        //public RelayCommand LoadWriteOffsUCCommand
+        //{
+        //    get
+        //    {
+        //        Count = "";
+        //        Sum = 0;
+        //        Cause = "";
+        //        return _LoadWriteOffsUCCommand ?? new RelayCommand(obj =>
+        //        {
+        //            _MainCodeBehind.LoadView(ViewType.WriteOffs);
+        //        });
+        //    }
+        //}
 
         #region INotifyPropertyChanged Implementation
         public event PropertyChangedEventHandler PropertyChanged;

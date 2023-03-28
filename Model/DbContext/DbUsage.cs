@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using StoreHouse.Model.Models;
+using StoreHouse.Model.OutputDataModels;
 
 namespace StoreHouse.Model.DbContext
 {
@@ -49,6 +50,45 @@ namespace StoreHouse.Model.DbContext
 
             return id;
         }
+        public static int GetDishIdByName(string name)
+        {
+            int id;
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                id = (from dish in db.Dishes
+                    where dish.Name == name
+                    select dish.Id).FirstOrDefault();
+            }
+
+            return id;
+        }
+        public static List<OutputAddDish> GetAllDishIngById(int dishId)
+        {
+            List<OutputAddDish> id;
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                id = (from ingr in db.OutputAddDishes
+                    where ingr.DishId == dishId
+                    select ingr).ToList();
+            }
+
+            return id;
+        }
+        public static int GetDishId(List<Dish> dishes)
+        {
+            int id = 1;
+            if (dishes.Count != 0)
+            {
+                foreach (var dish in dishes)
+                {
+                    id = dish.Id;
+                }
+                id += 1;
+                return id;
+            }
+            return id;
+
+        }
         public static List<WriteOff> GetAllWriteOffs()
         {
             using (StoreHouseContext db = new StoreHouseContext())
@@ -75,8 +115,17 @@ namespace StoreHouse.Model.DbContext
             decimal sum = 0;
             if (primeCost != null)
             {
-                sum = Convert.ToDecimal(primeCost.Replace('.', ',')) * Convert.ToDecimal(currentRemains.Replace('.', ','));
-                return sum;
+                try
+                {
+                    sum = Convert.ToDecimal(primeCost.Replace('.', ',')) *
+                          Convert.ToDecimal(currentRemains.Replace('.', ','));
+                    return sum;
+                }
+                catch (NullReferenceException)
+                {
+                    return sum;
+                }
+                
             }
 
             return sum;
@@ -88,6 +137,24 @@ namespace StoreHouse.Model.DbContext
                 string primeCost = "";
                 primeCost = Convert.ToString(Math.Round(sum / Convert.ToDecimal(currentRemains.Replace('.', ',')),2));
                 return primeCost;
+            }
+            catch (NullReferenceException e)
+            {
+                return "";
+            }
+
+        }
+        public static string GetPrimeCost(List<OutputAddDish> ingredientList)
+        {
+            try
+            {
+                double primeCost = 0;
+                foreach (var ingr in ingredientList)
+                {
+                    primeCost += Convert.ToDouble(ingr.Sum);
+                }
+
+                return Convert.ToString(Math.Round(primeCost,2)); ;
             }
             catch (NullReferenceException e)
             {

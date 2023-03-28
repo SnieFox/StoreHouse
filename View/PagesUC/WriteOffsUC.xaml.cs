@@ -14,6 +14,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using StoreHouse.Model.OutputDataModels;
+using StoreHouse.ViewModels.ViewSettingMethods;
+using DateOnly = System.DateOnly;
 
 namespace StoreHouse.View
 {
@@ -21,11 +24,11 @@ namespace StoreHouse.View
     /// Логика взаимодействия для WriteOffsUC.xaml
     /// </summary>
     public partial class WriteOffsUC
-    {
+    { 
         public WriteOffsUC()
         {
             InitializeComponent();
-            WriteOffsDataGrid.ItemsSource = StoreHouseContext.GetContext().WriteOffs.ToList();
+            WriteOffsDataGrid.ItemsSource = ViewSettings.GetOutputWriteOffs();
         }
     }
 }

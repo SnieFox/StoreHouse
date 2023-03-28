@@ -25,6 +25,7 @@
             <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Тип</TextBlock>
             <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Категорія</TextBlock>
             <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Фільтр</TextBlock>
+            <Button Command="{Binding LoadAddDishCommand, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" BorderBrush="#30BCC5" Background="Transparent" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="470,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Додати Страву</Button>
         </StackPanel>
         <ScrollViewer  Grid.Row="2">
             <DataGrid Foreground="#818181" FontSize="16" FontWeight="Medium" x:Name="DishesDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
@@ -33,7 +34,7 @@
                     <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Type, UpdateSourceTrigger=PropertyChanged}" Header="Тип"></DataGridTextColumn>
                     <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Category, UpdateSourceTrigger=PropertyChanged}" Header="Категорія"></DataGridTextColumn>
                     <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding PrimeCost, UpdateSourceTrigger=PropertyChanged}" Header="Собівартість"></DataGridTextColumn>
-                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Sum, UpdateSourceTrigger=PropertyChanged}" Header="Ціна"></DataGridTextColumn>
+                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Price, UpdateSourceTrigger=PropertyChanged}" Header="Ціна"></DataGridTextColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

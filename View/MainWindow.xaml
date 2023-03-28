@@ -273,9 +273,9 @@
                             <Image VerticalAlignment="Top" Margin="0,5,0,0" Source="../Images/Logo(Склад).png" Width="25" Height="25"></Image>
                             <Expander Padding="5" Grid.Column="1" Style="{DynamicResource ExpanderStyle1}"  FontSize="16" FontWeight="SemiBold" Header="Склад">
                                 <StackPanel >
-                                    <Button Command="{Binding LoadRemainsUCCommand, Mode=OneTime}" Padding="5" FontWeight="Regular" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Content="Залишки" FontSize="16" Height="35"></Button>
-                                    <Button Command="{Binding LoadSuppliesUCCommand, UpdateSourceTrigger=PropertyChanged, Mode=OneTime}" Padding="5" FontWeight="Regular" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" FontSize="16" Height="35">Постачання</Button>
-                                    <Button Command="{Binding LoadWriteOffsUCCommand, UpdateSourceTrigger=PropertyChanged, Mode=OneTime}" Padding="5" FontWeight="Regular" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" FontSize="16" Height="35">Списання</Button>
+                                    <Button Command="{Binding LoadRemainsUCCommand}" Padding="5" FontWeight="Regular" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" Content="Залишки" FontSize="16" Height="35"></Button>
+                                    <Button Command="{Binding LoadSuppliesUCCommand, UpdateSourceTrigger=PropertyChanged}" Padding="5" FontWeight="Regular" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" FontSize="16" Height="35">Постачання</Button>
+                                    <Button Command="{Binding LoadWriteOffsUCCommand, UpdateSourceTrigger=PropertyChanged}" Padding="5" FontWeight="Regular" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" FontSize="16" Height="35">Списання</Button>
                                 </StackPanel>
 
                             </Expander>
@@ -290,8 +290,8 @@
                             <Image VerticalAlignment="Top" Margin="0,5,0,0" Source="../Images/Logo (Меню).png" Width="25" Height="25"></Image>
                             <Expander Padding="5" Grid.Column="1" Style="{DynamicResource ExpanderStyle1}"  FontSize="16" FontWeight="SemiBold" Header="Меню">
                                 <StackPanel Margin="0,0,0,-70">
-                                    <Button Command="{Binding LoadDishesUCCommand, UpdateSourceTrigger=PropertyChanged, Mode=OneTime}" Padding="5" FontWeight="Regular" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" FontSize="16" Height="35">Страви</Button>
-                                    <Button Command="{Binding LoadIngredientsUCCommand, UpdateSourceTrigger=PropertyChanged, Mode=OneTime}" Padding="5" FontWeight="Regular" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" FontSize="16" Height="35">Інгредієнти</Button>
+                                    <Button Command="{Binding LoadDishesUCCommand, UpdateSourceTrigger=PropertyChanged}" Padding="5" FontWeight="Regular" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" FontSize="16" Height="35">Страви</Button>
+                                    <Button Command="{Binding LoadIngredientsUCCommand, UpdateSourceTrigger=PropertyChanged}" Padding="5" FontWeight="Regular" HorizontalContentAlignment="Left" BorderThickness="0,0,0,1" FontSize="16" Height="35">Інгредієнти</Button>
                                 </StackPanel>
 
                             </Expander>

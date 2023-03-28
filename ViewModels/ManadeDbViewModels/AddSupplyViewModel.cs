@@ -19,6 +19,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
     {
         private IMainWindowsCodeBehind _MainCodeBehind;
 
+
         public AddSupplyViewModel(IMainWindowsCodeBehind codeBehind)
         {
             if (codeBehind == null) throw new ArgumentNullException(nameof(codeBehind));
@@ -177,20 +178,36 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
             }
         }
         /// Переход ко Supplies вьюшке
+        ///
         private RelayCommand _LoadSuppliesUCCommand;
         public RelayCommand LoadSuppliesUCCommand
         {
             get
             {
-                Count = "";
-                Sum = 0;
-                PrimeCost = "";
                 return _LoadSuppliesUCCommand ?? new RelayCommand(obj =>
                 {
+                    _Count = "";
+                    _Sum = 0;
+                    _PrimeCost = "";
                     _MainCodeBehind.LoadView(ViewType.Supplies);
                 });
             }
         }
+
+        //private RelayCommand _LoadSuppliesUCCommand;
+        //public RelayCommand LoadSuppliesUCCommand
+        //{
+        //    get
+        //    {
+        //        Count = "";
+        //        Sum = 0;
+        //        PrimeCost = "";
+        //        return _LoadSuppliesUCCommand ?? new RelayCommand(obj =>
+        //        {
+        //            _MainCodeBehind.LoadView(ViewType.Supplies);
+        //        });
+        //    }
+        //}
 
 
         #region INotifyPropertyChanged Implementation

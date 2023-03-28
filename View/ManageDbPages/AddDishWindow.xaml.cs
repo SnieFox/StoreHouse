@@ -1,7 +1,6 @@
-﻿using StoreHouse.Model;
+﻿using StoreHouse.ViewModels.ViewSettingMethods;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,20 +12,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using StoreHouse.ViewModels.ViewSettingMethods;
+using StoreHouse.ViewModels.ManadeDbViewModels;
 
-namespace StoreHouse.View
+namespace StoreHouse.View.ManageDbPages
 {
     /// <summary>
-    /// Логика взаимодействия для SuppliesUC.xaml
+    /// Логика взаимодействия для AddDishWindow.xaml
     /// </summary>
-    public partial class SuppliesUC
+    public partial class AddDishWindow
     {
-        public SuppliesUC()
+        public AddDishWindow()
         {
             InitializeComponent();
-            SuppliesDataGrid.ItemsSource = ViewSettings.GetOutputSupplies();
-
+            AddDishesDataGrid.ItemsSource = AddDishViewModel.GetAddDishesList();
         }
     }
 }
