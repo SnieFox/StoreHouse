@@ -44,7 +44,20 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
             set
             {
                 _Count = value;
-                Sum = DbUsage.GetSum(DbUsage.GetPrimeCost(DbUsage.GetIngredientIdByName(SeletedProduct), SeletedProduct), _Count);
+                Sum = DbUsage.GetSum(DbUsage.GetPrimeCost(DbUsage.GetIngredientIdByName(SeletedIngredient), SeletedIngredient), _Count);
+                OnPropertyChanged();
+            }
+        }
+
+        //DishCount
+        private static string _DishCount;
+        public string DishCount
+        {
+            get => _DishCount;
+            set
+            {
+                _DishCount = value;
+                DishSum = DbUsage.GetSum(DishCount, DbUsage.GetAllDishIngById(DbUsage.GetDishIdByName(SeletedDish)));
                 OnPropertyChanged();
             }
         }
@@ -60,47 +73,107 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
             }
         }
 
-        //Combobox ProductList
-        private List<string> _ProductList = DbUsage.GetProductNames();
-
-        public List<string> ProductList
+        private static decimal _DishSum;
+        public decimal DishSum
         {
-            get => _ProductList;
+            get => _DishSum;
             set
             {
-                _ProductList = value;
+                _DishSum = value;
+                OnPropertyChanged();
             }
         }
-        private string _SeletedProduct;
-        public string SeletedProduct
+        //Combobox IngredientsList
+        private List<string> _IngredientsList = DbUsage.GetProductNames();
+
+        public List<string> IngredientsList
         {
-            get => _SeletedProduct;
+            get => _IngredientsList;
             set
             {
-                _SeletedProduct = value;
+                _IngredientsList = value;
+            }
+        }
+        private string _SeletedIngredient;
+        public string SeletedIngredient
+        {
+            get => _SeletedIngredient;
+            set
+            {
+                _SeletedIngredient = value;
                 OnPropertyChanged();
             }
         }
 
+        //Combobox DishesList
+        private List<string> _DishesList = DbUsage.GetDishNames();
+
+        public List<string> DishesList
+        {
+            get => _DishesList;
+            set
+            {
+                _DishesList = value;
+            }
+        }
+        private string _SeletedDish;
+        public string SeletedDish
+        {
+            get => _SeletedDish;
+            set
+            {
+                _SeletedDish = value;
+                OnPropertyChanged();
+            }
+        }
 
         // Commands
-        // Комманда добавления Списания
-        private RelayCommand _AddWriteOffCommand;
-        public RelayCommand AddWriteOffCommand
+        // Комманда добавления Списания Ингредиента
+        private RelayCommand _AddWriteOffIngredientCommand;
+        public RelayCommand AddWriteOffIngredientCommand
         {
             get
             {
-                return _AddWriteOffCommand ?? new RelayCommand(obj =>
+                return _AddWriteOffIngredientCommand ?? new RelayCommand(obj =>
                 {
                     try
                     {
                         AddToDb addToDb = new AddToDb();
-                        addToDb.AddWriteOff(
-                            DbUsage.GetIngredientIdByName(SeletedProduct),
+                        addToDb.AddWriteOffIngredient(
+                            DbUsage.GetIngredientIdByName(SeletedIngredient),
                             DateTime.Now.ToString("dd/MM/yyyy HH:mm"),
-                            SeletedProduct,
+                            SeletedIngredient,
                             Count,
                             Sum,
+                            Cause
+                        );
+                        _MainCodeBehind.LoadView(ViewType.WriteOffs);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("Щось пішло не так! Перевірте правильність заповнення форми.");
+                        throw;
+                    }
+                });
+            }
+        }
+        // Комманда добавления Списания Блюда
+        private RelayCommand _AddWriteOffDishCommand;
+        public RelayCommand AddWriteOffDishCommand
+        {
+            get
+            {
+                return _AddWriteOffDishCommand ?? new RelayCommand(obj =>
+                {
+                    try
+                    {
+                        AddToDb addToDb = new AddToDb();
+                        addToDb.AddWriteOffDish(
+                            DbUsage.GetDishIdByName(SeletedDish),
+                            DateTime.Now.ToString("dd/MM/yyyy HH:mm"),
+                            SeletedDish,
+                            DishCount,
+                            DishSum,
                             Cause
                         );
                         _MainCodeBehind.LoadView(ViewType.WriteOffs);

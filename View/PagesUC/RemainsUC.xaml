@@ -27,7 +27,7 @@
             <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Фільтр</TextBlock>
         </StackPanel>
         <ScrollViewer Grid.Row="2">
-            <DataGrid Foreground="#818181" FontSize="16" FontWeight="Medium" x:Name="RemainsDataGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Remains}">
+            <DataGrid Foreground="#818181" FontSize="16" FontWeight="Medium" x:Name="RemainsDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"  Header="Назва"></DataGridTextColumn>
                     <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Type, UpdateSourceTrigger=PropertyChanged}"  Header="Тип"></DataGridTextColumn>

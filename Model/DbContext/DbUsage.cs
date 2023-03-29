@@ -109,6 +109,17 @@ namespace StoreHouse.Model.DbContext
 
             return productNamesList;
         }
+        public static List<string> GetDishNames()
+        {
+            List<string> dishesNamesList = new List<string>();
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                dishesNamesList = (from dish in db.Dishes
+                    select dish.Name).ToList();
+            }
+
+            return dishesNamesList;
+        }
 
         public static decimal GetSum(string primeCost, string currentRemains)
         {
@@ -129,6 +140,18 @@ namespace StoreHouse.Model.DbContext
             }
 
             return sum;
+        }
+        public static decimal GetSum(string count, List<OutputAddDish> ingrList)
+        {
+            decimal sum = 0;
+
+            foreach (var ingr in ingrList)
+            {
+                sum += Convert.ToDecimal(ingr.Sum);
+            }
+            string[] tempCount = count.Split('к');
+            return sum * Convert.ToDecimal(tempCount[0]);
+
         }
         public static string GetPrimeCost(decimal sum, string currentRemains)
         {

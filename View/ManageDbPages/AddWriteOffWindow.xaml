@@ -6,41 +6,87 @@
         mc:Ignorable="d"
         d:DesignHeight="700" d:DesignWidth="1060"
         Background="AliceBlue">
-    <Grid VerticalAlignment="Center" Height="700" Margin="10,0,0,0">
-        <Grid.Background>
-            <ImageBrush Opacity="50" ImageSource="../../Images/Иконки.png"></ImageBrush>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <TextBlock Margin="150,0,0,0" Grid.Row="0" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="34">Найменування</TextBlock>
-        <Border Margin="100,0,0,0" Grid.Row="0" Height="34" BorderThickness="2" HorizontalAlignment="Left" Width="200" BorderBrush="#000" Grid.Column="1">
-            <ComboBox ItemsSource="{Binding ProductList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SeletedProduct, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="30" Width="200"></ComboBox>
-        </Border>
+    <DockPanel>
+        <TabControl>
+            <TabItem Height="40" FontSize="15" FontWeight="SemiBold" Header="Списання Інгредієнту">
+                <Grid VerticalAlignment="Center" Height="700" Margin="10,0,0,0">
+                    <Grid.Background>
+                        <ImageBrush Opacity="50" ImageSource="../../Images/Иконки.png"></ImageBrush>
+                    </Grid.Background>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="108*"></RowDefinition>
+                        <RowDefinition Height="95*"></RowDefinition>
+                        <RowDefinition Height="140*"></RowDefinition>
+                        <RowDefinition Height="88*"></RowDefinition>
+                        <RowDefinition Height="154*"></RowDefinition>
+                        <RowDefinition Height="115"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Margin="150,0,0,0" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="34">Найменування</TextBlock>
+                    <Border Margin="100,45,0,34" Grid.Row="0" BorderThickness="2" HorizontalAlignment="Left" Width="200" BorderBrush="#000" Grid.Column="1">
+                        <ComboBox ItemsSource="{Binding IngredientsList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SeletedIngredient, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="30" Width="200"></ComboBox>
+                    </Border>
 
-        <TextBlock Margin="150,0,0,0" Grid.Row="1" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="33">Кількість</TextBlock>
-        <TextBox Margin="50" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2" BorderBrush="#000" Height="30" Width="400"></TextBox>
+                    <TextBlock Margin="150,0,0,0" Grid.Row="1" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="33">Кількість (кг)</TextBlock>
+                    <TextBox Margin="50,0,0,0" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2" BorderBrush="#000" Height="30" Width="400"></TextBox>
 
-        <TextBlock Margin="150,0,0,0" Grid.Row="2" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="33">Коментар</TextBlock>
-        <TextBox Margin="50,0,0,0" Text="{Binding Cause, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2" BorderBrush="#000" Height="113" Width="400"></TextBox>
+                    <TextBlock Margin="150,0,0,0" Grid.Row="2" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="32">Коментар</TextBlock>
+                    <TextBox Margin="50,0,0,0" Text="{Binding Cause, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2" BorderBrush="#000" Height="112" Width="400"></TextBox>
 
-        <TextBlock Margin="150,0,0,0" Grid.Row="3" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="33">Сума</TextBlock>
-        <Border BorderBrush="Black" BorderThickness="2" Margin="50" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="200">
-            <TextBlock Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-        </Border>
+                    <TextBlock Margin="150,0,0,0" Grid.Row="3" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="32">Сума (грн)</TextBlock>
+                    <Border BorderBrush="Black" BorderThickness="2" Margin="50,0,0,0" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="200">
+                        <TextBlock Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                    </Border>
 
-        <StackPanel  Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="315,1,0,-1" Width="430">
-            <Button Command="{Binding AddWriteOffCommand, UpdateSourceTrigger=PropertyChanged}" Height="50" BorderThickness="1" BorderBrush="#F3F3F3" FontSize="20" FontWeight="Medium" Background="#30BCC5" Width="200">Додати Списання</Button>
-            <Button Command="{Binding LoadWriteOffsUCCommand, UpdateSourceTrigger=PropertyChanged }" Height="50" BorderThickness="1" BorderBrush="#F3F3F3" FontSize="20" FontWeight="Medium" Background="#30BCC5" Width="200" Margin="30,0,0,0">Відмінити</Button>
-        </StackPanel>
-    </Grid>
+                    <StackPanel  Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="315,1,0,0" Width="430" Grid.RowSpan="2">
+                        <Button Command="{Binding AddWriteOffIngredientCommand, UpdateSourceTrigger=PropertyChanged}" Height="50" BorderThickness="1" BorderBrush="#F3F3F3" FontSize="20" FontWeight="Medium" Background="#30BCC5" Width="200">Додати Списання</Button>
+                        <Button Command="{Binding LoadWriteOffsUCCommand, UpdateSourceTrigger=PropertyChanged }" Height="50" BorderThickness="1" BorderBrush="#F3F3F3" FontSize="20" FontWeight="Medium" Background="#30BCC5" Width="200" Margin="30,0,0,0">Відмінити</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Height="40" FontSize="15" FontWeight="SemiBold" Header="Списання Страви">
+                <Grid VerticalAlignment="Center" Height="700" Margin="10,0,0,0">
+                    <Grid.Background>
+                        <ImageBrush Opacity="50" ImageSource="../../Images/Иконки.png"></ImageBrush>
+                    </Grid.Background>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="108*"></RowDefinition>
+                        <RowDefinition Height="95*"></RowDefinition>
+                        <RowDefinition Height="140*"></RowDefinition>
+                        <RowDefinition Height="88*"></RowDefinition>
+                        <RowDefinition Height="154*"></RowDefinition>
+                        <RowDefinition Height="115"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Margin="150,0,0,0" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="34">Найменування</TextBlock>
+                    <Border Margin="100,45,0,34" Grid.Row="0" BorderThickness="2" HorizontalAlignment="Left" Width="200" BorderBrush="#000" Grid.Column="1">
+                        <ComboBox ItemsSource="{Binding DishesList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SeletedDish, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="30" Width="200"></ComboBox>
+                    </Border>
+
+                    <TextBlock Margin="150,0,0,0" Grid.Row="1" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="33">Кількість (шт)</TextBlock>
+                    <TextBox Margin="50,0,0,0" Text="{Binding DishCount, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2" BorderBrush="#000" Height="30" Width="400"></TextBox>
+
+                    <TextBlock Margin="150,0,0,0" Grid.Row="2" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="32">Коментар</TextBlock>
+                    <TextBox Margin="50,0,0,0" Text="{Binding Cause, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2" BorderBrush="#000" Height="112" Width="400"></TextBox>
+
+                    <TextBlock Margin="150,0,0,0" Grid.Row="3" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="32">Сума (грн)</TextBlock>
+                    <Border BorderBrush="Black" BorderThickness="2" Margin="50,0,0,0" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="200">
+                        <TextBlock Text="{Binding DishSum, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                    </Border>
+
+                    <StackPanel  Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="315,1,0,0" Width="430" Grid.RowSpan="2">
+                        <Button Command="{Binding AddWriteOffDishCommand, UpdateSourceTrigger=PropertyChanged}" Height="50" BorderThickness="1" BorderBrush="#F3F3F3" FontSize="20" FontWeight="Medium" Background="#30BCC5" Width="200">Додати Списання</Button>
+                        <Button Command="{Binding LoadWriteOffsUCCommand, UpdateSourceTrigger=PropertyChanged }" Height="50" BorderThickness="1" BorderBrush="#F3F3F3" FontSize="20" FontWeight="Medium" Background="#30BCC5" Width="200" Margin="30,0,0,0">Відмінити</Button>
+                    </StackPanel>
+                </Grid>
+
+            </TabItem>
+        </TabControl>
+    </DockPanel>
 </UserControl>

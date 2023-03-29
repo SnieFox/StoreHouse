@@ -27,9 +27,11 @@ namespace StoreHouse.Model
         private static StoreHouseContext _Context;
         public static StoreHouseContext GetContext()
         {
-            if (_Context == null)
-                _Context = new StoreHouseContext();
+            _Context = new StoreHouseContext();
             return _Context;
+            //if (_Context == null)
+            //    _Context = new StoreHouseContext();
+            //return _Context;
         }
     }
 }
