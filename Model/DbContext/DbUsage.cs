@@ -62,6 +62,18 @@ namespace StoreHouse.Model.DbContext
 
             return id;
         }
+        public static int GetSupplyIdByName(string name)
+        {
+            int id;
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                id = (from sup in db.Supplies
+                    where sup.Product == name
+                    select sup.Id).FirstOrDefault();
+            }
+
+            return id;
+        }
         public static List<OutputAddDish> GetAllDishIngById(int dishId)
         {
             List<OutputAddDish> id;
@@ -207,6 +219,18 @@ namespace StoreHouse.Model.DbContext
                 return "";
             }
 
+        }
+
+        public static List<Supply> GetIngredientsSupplyListByName(string name)
+        {
+            List<Supply> id;
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                id = (from supl in db.Supplies
+                    where supl.Product == name
+                    select supl).ToList();
+            }
+            return id;
         }
 
     }

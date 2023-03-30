@@ -28,7 +28,12 @@
             <Button Command="{Binding LoadAddSupplyCommand, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" BorderBrush="#30BCC5" Background="Transparent" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="350,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Додати постачання</Button>
         </StackPanel>
         <ScrollViewer  Grid.Row="2">
-            <DataGrid Foreground="#818181" FontSize="16" FontWeight="Medium" x:Name="SuppliesDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid SelectedItem="{Binding ChoosenSupplyItem, UpdateSourceTrigger=PropertyChanged}" Foreground="#818181" FontSize="16" FontWeight="Medium" x:Name="SuppliesDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem BorderThickness="0" Background="Transparent" FontSize="16" FontWeight="Medium" Foreground="#30BCC5" Header="Редагувати" Command="{Binding LoadEditSupplyCommand}"></MenuItem>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
                 <DataGrid.Columns>
                     <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="№"></DataGridTextColumn>
                     <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Date, UpdateSourceTrigger=PropertyChanged}" Header="Дата"></DataGridTextColumn>
@@ -36,20 +41,6 @@
                     <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Product, UpdateSourceTrigger=PropertyChanged}" Header="Товари"></DataGridTextColumn>
                     <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" Header="Коментар"></DataGridTextColumn>
                     <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Sum, UpdateSourceTrigger=PropertyChanged}" Header="Сума"></DataGridTextColumn>
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button BorderThickness="0" Background="Transparent" FontSize="16" FontWeight="Medium" Foreground="#30BCC5" Content="Деталі"></Button>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button BorderThickness="0" Background="Transparent" FontSize="16" FontWeight="Medium" Foreground="#30BCC5" Content="Редагувати"></Button>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>

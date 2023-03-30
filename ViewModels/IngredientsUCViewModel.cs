@@ -25,7 +25,7 @@ namespace StoreHouse.ViewModels
         }
 
         //Properties
-
+        
         //Commands
 
         private RelayCommand _LoadAddIngredientCommand;

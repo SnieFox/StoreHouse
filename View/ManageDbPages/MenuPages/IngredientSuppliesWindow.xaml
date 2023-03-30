@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="StoreHouse.View.ManageDbPages.MenuPages.IngredientSuppliesWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StoreHouse.View.ManageDbPages.MenuPages"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1060" Background="AliceBlue">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="87*"></RowDefinition>
+            <RowDefinition Height="613*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="30,10,10,10" Orientation="Horizontal" Grid.Row="0">
+            <TextBlock Text="{Binding SupplyIngredientName}" Margin="0,0,0,0" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="33" Width="500"></TextBlock>
+            <Button Command="{Binding LoadRemainsUCCommand, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Margin="280,0,0,0" Height="50" BorderThickness="1" BorderBrush="#F3F3F3" FontSize="20" FontWeight="Medium" Background="#30BCC5" Width="200">Назад</Button>
+        </StackPanel>
+        <StackPanel Margin="10,10,10,10" Orientation="Horizontal" Grid.Row="1">
+            <TextBlock Margin="30,0,0,0" Grid.Row="2" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="34">Тип</TextBlock>
+            <Border Grid.Row="2" Height="34" BorderThickness="2" HorizontalAlignment="Left" Margin="30,0,0,0" Width="100" BorderBrush="#000" Grid.Column="1">
+                <ComboBox ItemsSource="{Binding TypeList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedType, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="30" Width="100"></ComboBox>
+            </Border>
+            <TextBlock Margin="30,0,0,0" Grid.Row="2" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="34">Категорія</TextBlock>
+            <Border Grid.Row="2" Height="34" BorderThickness="2" HorizontalAlignment="Left" Margin="30,0,0,0" Width="100" BorderBrush="#000" Grid.Column="1">
+                <ComboBox ItemsSource="{Binding CategoryList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCategory, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="30" Width="100"></ComboBox>
+            </Border>
+            <TextBlock Margin="30,0,0,0" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="33">Собівартість</TextBlock>
+            <Border Grid.Row="2" Height="34" BorderThickness="2" HorizontalAlignment="Left" Margin="30,0,0,0" Width="100" BorderBrush="#000" Grid.Column="1">
+                <TextBlock Text ="{Binding PrimeCost, UpdateSourceTrigger=PropertyChanged}" Margin="30,0,0,0"  HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="200"/>
+            </Border>
+            <TextBlock Margin="30,0,0,0" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="33">Ціна</TextBlock>
+            <Border Grid.Row="2" Height="34" BorderThickness="2" HorizontalAlignment="Left" Margin="30,0,0,0" Width="100" BorderBrush="#000" Grid.Column="1">
+                <TextBox  Text ="{Binding Price, UpdateSourceTrigger=PropertyChanged}"  VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Height="34" Width="100"/>
+            </Border>
+
+        </StackPanel>
+        <ScrollViewer  Grid.Row="2">
+            <DataGrid Foreground="#818181" FontSize="16" FontWeight="Medium" x:Name="IngredientSupplyDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Id, UpdateSourceTrigger=PropertyChanged}" Header="№"></DataGridTextColumn>
+                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Date, UpdateSourceTrigger=PropertyChanged}" Header="Дата"></DataGridTextColumn>
+                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Supplier, UpdateSourceTrigger=PropertyChanged}" Header="Постачальник"></DataGridTextColumn>
+                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Product, UpdateSourceTrigger=PropertyChanged}" Header="Товари"></DataGridTextColumn>
+                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" Header="Коментар"></DataGridTextColumn>
+                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Sum, UpdateSourceTrigger=PropertyChanged}" Header="Сума"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+    </Grid>
+
+</UserControl>

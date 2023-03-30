@@ -14,9 +14,11 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using StoreHouse.View;
 using StoreHouse.View.ManageDbPages;
+using StoreHouse.View.ManageDbPages.MenuPages;
 using StoreHouse.ViewModels;
 using StoreHouse.ViewModels.Interfaces;
 using StoreHouse.ViewModels.ManadeDbViewModels;
+using StoreHouse.ViewModels.ManadeDbViewModels.MenuPagesViewModels;
 
 namespace StoreHouse
 {
@@ -35,7 +37,9 @@ namespace StoreHouse
         AddSupply,
         AddWriteOff,
         AddDish,
-        AddIngredientToDish
+        AddIngredientToDish,
+        IngredientSupply,
+        EditSupply
     }
     public partial class MainWindow : Window, IMainWindowsCodeBehind
     {
@@ -130,6 +134,18 @@ namespace StoreHouse
                     AddIngredientToDishViewModel vmAddIngredientToDish = new AddIngredientToDishViewModel(this);
                     viewAddIngredientToDish.DataContext = vmAddIngredientToDish;
                     this.OutputView.Content = viewAddIngredientToDish;
+                    break;
+                case ViewType.IngredientSupply:
+                    IngredientSuppliesWindow viewIngredientSuppliesWindow = new IngredientSuppliesWindow();
+                    IngredientSuppliesViewModel vmIngredientSuppliesWindow = new IngredientSuppliesViewModel(this);
+                    viewIngredientSuppliesWindow.DataContext = vmIngredientSuppliesWindow;
+                    this.OutputView.Content = viewIngredientSuppliesWindow;
+                    break;
+                case ViewType.EditSupply:
+                    EditSupplyWindow viewEditSupplyWindow = new EditSupplyWindow();
+                    EditSupplyViewModel vmEditSupplyWindow = new EditSupplyViewModel(this);
+                    viewEditSupplyWindow.DataContext = vmEditSupplyWindow;
+                    this.OutputView.Content = viewEditSupplyWindow;
                     break;
             }
 

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using StoreHouse.Model;
 using StoreHouse.Model.Models;
 using System.Runtime.CompilerServices;
+using StoreHouse.Model.OutputDataModels;
 
 namespace StoreHouse.ViewModels
 {
@@ -25,24 +26,36 @@ namespace StoreHouse.ViewModels
             _MainCodeBehind = codeBehind;
         }
 
-
-        void GetAllRemains()
+        // ChosenRemainsItem Field
+        private static OutputIngredient _ChosenRemainsItem;
+        public OutputIngredient ChosenRemainsItem
         {
-
+            get => _ChosenRemainsItem;
+            set
+            {
+                _ChosenRemainsItem = value;
+                OnPropertyChanged();
+            }
         }
-        ////ComboBox TypeOfRemains
-        //private List<string> typeOfRemainsComboBox = new List<string>() { "Інгредієнт", "Виробництво", "Страва" };
 
-        //public List<string> TypeOfRemainsComboBox
-        //{
-        //    get => typeOfRemainsComboBox;
-        //    set
-        //    {
-        //        typeOfRemainsComboBox = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
+        public static string GetChosenRemainsItemName()
+        {
+            return _ChosenRemainsItem.Name;
+        }
         //Commands
+
+        private RelayCommand _LoadIngredientSuppliesCommand;
+        public RelayCommand LoadIngredientSuppliesCommand
+        {
+            get
+            {
+                return _LoadIngredientSuppliesCommand ?? new RelayCommand(obj =>
+                {
+                    _MainCodeBehind.LoadView(ViewType.IngredientSupply);
+                });
+            }
+        }
+
         private RelayCommand _ShowMessageCommand;
         public RelayCommand ShowMessageCommand
         {

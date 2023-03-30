@@ -83,6 +83,7 @@ namespace StoreHouse.Model.DbContext.Methods
                     IngredientId = ingredientId,
                     Date = date,
                     Supplier = supplier,
+                    Count = Convert.ToDouble(count.Replace('.', ',')),
                     Product = product,
                     Comment = comment,
                     Sum = sum
@@ -95,7 +96,7 @@ namespace StoreHouse.Model.DbContext.Methods
                 {
                     string[] tempRemainsSplit = id.CurrentRemains.Split(' ');
                     decimal tempRemains = Convert.ToDecimal(tempRemainsSplit[0].Replace('.', ','));
-                    id.CurrentRemains = Convert.ToString(tempRemains + Convert.ToDecimal(count));
+                    id.CurrentRemains = Convert.ToString(tempRemains + Convert.ToDecimal(count.Replace('.', ',')));
                     id.Sum = Math.Round(DbUsage.GetSum(Convert.ToString(id.PrimeCost), id.CurrentRemains),2);
                 }
                 db.SaveChanges();
