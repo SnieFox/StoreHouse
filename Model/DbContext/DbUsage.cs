@@ -74,6 +74,18 @@ namespace StoreHouse.Model.DbContext
 
             return id;
         }
+        public static int GetWriteOffIdByName(string name)
+        {
+            int id;
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                id = (from wr in db.WriteOffs
+                    where wr.Product == name
+                    select wr.Id).FirstOrDefault();
+            }
+
+            return id;
+        }
         public static List<OutputAddDish> GetAllDishIngById(int dishId)
         {
             List<OutputAddDish> id;
@@ -231,6 +243,18 @@ namespace StoreHouse.Model.DbContext
                     select supl).ToList();
             }
             return id;
+        }
+
+        public static string GetIngredientUnitByName(string name)
+        {
+            string unit;
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                unit = (from ingr in db.Ingredients
+                    where ingr.Name == name
+                    select ingr.Unit).FirstOrDefault();
+            }
+            return unit;
         }
 
     }

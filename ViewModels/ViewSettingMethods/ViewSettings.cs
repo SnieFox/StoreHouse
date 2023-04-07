@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StoreHouse.Model;
+using StoreHouse.Model.DbContext;
 using StoreHouse.Model.Models;
 using StoreHouse.Model.OutputDataModels;
 
@@ -38,7 +39,7 @@ namespace StoreHouse.ViewModels.ViewSettingMethods
                 List<OutputSupplies> dataList = new List<OutputSupplies>();
                 foreach (var temp in tempList)
                 {
-                    dataList.Add(new OutputSupplies(temp.Id.ToString(), temp.Date, temp.Supplier, temp.Product, temp.Comment, $"{Math.Round(temp.Sum, 2)}грн"));
+                    dataList.Add(new OutputSupplies(temp.Id.ToString(), temp.Date, temp.Supplier, temp.Product, temp.Comment, $"{Math.Round(temp.Sum, 2)}грн", $"{Convert.ToString(temp.Count).Replace('.', ',')}{DbUsage.GetIngredientUnitByName(temp.Product)}"));
                 }
                 return dataList;
             }
@@ -56,8 +57,12 @@ namespace StoreHouse.ViewModels.ViewSettingMethods
                 List<OutputIngredient> dataList = new List<OutputIngredient>();
                 foreach (var temp in tempList)
                 {
-                    dataList.Add(new OutputIngredient(temp.Name, temp.Unit,$"{Convert.ToString(Math.Round(Convert.ToDecimal(temp.CurrentRemains.Replace('.', ',')), 2))}{temp.Unit}",$"{Math.Round(temp.PrimeCost,2)}грн",$"{Math.Round(temp.Sum, 2)}грн", temp.Type));
+                    var tempRemains = temp.CurrentRemains.Split(' ');
+                    dataList.Add(new OutputIngredient(temp.Name, temp.Unit,
+                        $"{Convert.ToString(Math.Round(Convert.ToDecimal(tempRemains[0].Replace('.', ',')), 2))}{temp.Unit}",
+                        $"{Math.Round(temp.PrimeCost, 2)}грн", $"{Math.Round(temp.Sum, 2)}грн", temp.Type));
                 }
+
                 return dataList;
             }
             catch (SqlNullValueException e)

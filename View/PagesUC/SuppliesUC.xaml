@@ -39,8 +39,9 @@
                     <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Date, UpdateSourceTrigger=PropertyChanged}" Header="Дата"></DataGridTextColumn>
                     <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Supplier, UpdateSourceTrigger=PropertyChanged}" Header="Постачальник"></DataGridTextColumn>
                     <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Product, UpdateSourceTrigger=PropertyChanged}" Header="Товари"></DataGridTextColumn>
-                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" Header="Коментар"></DataGridTextColumn>
+                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Header="Кількість"></DataGridTextColumn>
                     <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Sum, UpdateSourceTrigger=PropertyChanged}" Header="Сума"></DataGridTextColumn>
+                    <DataGridTextColumn Foreground="#3F3E3E" Binding="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" Header="Коментар"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>

@@ -14,8 +14,9 @@ namespace StoreHouse.Model.OutputDataModels
         public string Product { get; set; }
         public string Comment { get; set; }
         public string Sum { get; set; }
+        public string Count { get; set; }
 
-        public OutputSupplies(string id ,string date, string supplier, string product, string comment, string sum)
+        public OutputSupplies(string id , string date, string supplier, string product, string comment, string sum, string count)
         {
             Id = id;
             Date = date;
@@ -23,6 +24,7 @@ namespace StoreHouse.Model.OutputDataModels
             Product = product;
             Comment = comment;
             Sum = sum;
+            Count = count;
         }
     }
 

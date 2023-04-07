@@ -1,9 +1,11 @@
 ﻿using StoreHouse.Model.Commands;
+using StoreHouse.Model.OutputDataModels;
 using StoreHouse.ViewModels.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,8 +13,6 @@ namespace StoreHouse.ViewModels
 {
     internal class WriteOffsUCViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
-
         //Fields
         private IMainWindowsCodeBehind _MainCodeBehind;
 
@@ -25,7 +25,21 @@ namespace StoreHouse.ViewModels
         }
 
         //Properties
-
+        // ChosenRemainsItem Field
+        private static OutputWriteOff _ChoosenWriteOffItem;
+        public OutputWriteOff ChoosenWriteOffItem
+        {
+            get => _ChoosenWriteOffItem;
+            set
+            {
+                _ChoosenWriteOffItem = value;
+                OnPropertyChanged();
+            }
+        }
+        public static OutputWriteOff GetChoosenWriteOffItem()
+        {
+            return _ChoosenWriteOffItem;
+        }
         //Commands
         private RelayCommand _LoadAddWriteOffCommand;
         public RelayCommand LoadAddWriteOffCommand
@@ -52,5 +66,38 @@ namespace StoreHouse.ViewModels
                 });
             }
         }
+
+        private RelayCommand _LoadEditWriteOffCommand;
+        public RelayCommand LoadEditWriteOffCommand
+        {
+            get
+            {
+                return _LoadEditWriteOffCommand ?? new RelayCommand(obj =>
+                {
+                    _MainCodeBehind.LoadView(ViewType.EditWriteOff);
+                });
+            }
+        }
+        private RelayCommand _LoadDetailsWriteOffCommand;
+        public RelayCommand LoadDetailsWriteOffCommand
+        {
+            get
+            {
+                return _LoadDetailsWriteOffCommand ?? new RelayCommand(obj =>
+                {
+                    _MainCodeBehind.LoadView(ViewType.DetailsWriteOff);
+                });
+            }
+        }
+
+        #region INotifyPropertyChanged Implementation
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
     }
 }

@@ -14,7 +14,8 @@ namespace StoreHouse.Model.Models
         public string Date { get; set; }
         public string Product { get; set; }
         public decimal Sum { get; set; }
-        public string Cause { get; set; }
+        public string? Cause { get; set; }
+        public string Count { get; set; }
 
     }
 }

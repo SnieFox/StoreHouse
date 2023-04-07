@@ -41,13 +41,13 @@
         <TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2" BorderBrush="#000" Height="30" Width="400"></TextBox>
 
         <TextBlock Margin="30,0,0,0" Grid.Row="3" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="33">Собівартість</TextBlock>
-        <TextBox Text="{Binding PrimeCost, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2" BorderBrush="#000" Height="30" Width="400"></TextBox>
+        <TextBox Text="{Binding NewPrimeCost, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2" BorderBrush="#000" Height="30" Width="400"></TextBox>
 
         <TextBlock Margin="30,0,0,0" Grid.Row="4" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="33">Загальна сума</TextBlock>
-        <TextBox Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2" BorderBrush="#000" Height="30" Width="400"></TextBox>
+        <TextBox Text="{Binding NewSum, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2" BorderBrush="#000" Height="30" Width="400"></TextBox>
 
         <TextBlock Margin="30,0,0,0" Grid.Row="5" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="33">Коментар</TextBlock>
-        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalContentAlignment="Center" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2" BorderBrush="#000" Height="30" Width="400"></TextBox>
+        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2" BorderBrush="#000" Height="30" Width="400"></TextBox>
 
         <StackPanel  Grid.Row="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="315,1,0,-1" Width="430">
             <Button Command="{Binding EditSupplyCommand, UpdateSourceTrigger=PropertyChanged}" Height="50" BorderThickness="1" BorderBrush="#F3F3F3" FontSize="20" FontWeight="Medium" Background="#30BCC5" Width="200">Змінити Постачання</Button>

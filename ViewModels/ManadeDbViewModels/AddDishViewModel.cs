@@ -155,16 +155,20 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
                                 DbUsage.GetDishIdByName(_Name),
                                 ingr.Name,
                                 $"{Math.Round(Convert.ToDouble(ingr.Count), 2)}кг",
-                                $"{Math.Round(Convert.ToDouble(ingr.Sum),2)}грн"
+                                $"{Math.Round(Convert.ToDouble(ingr.Sum), 2)}грн"
                             );
                         }
+
                         //AddDishViewModel.SetAddDishesList(DbUsage.GetAllDishIngById(DbUsage.GetDishId(DbUsage.GetAllDishes())));
+                        _MainCodeBehind.LoadView(ViewType.Dishes);
+                    }
+                    catch (FormatException e)
+                    {
                         _MainCodeBehind.LoadView(ViewType.Dishes);
                     }
                     catch (Exception e)
                     {
                         MessageBox.Show("Щось пішло не так! Перевірте правильність заповнення форми.");
-                        throw;
                     }
                 });
             }
