@@ -27,8 +27,6 @@ namespace StoreHouse.View
     { 
         public WriteOffsUC()
         {
-            InitializeComponent();
-            WriteOffsDataGrid.ItemsSource = ViewSettings.GetOutputWriteOffs();
-        }
+            InitializeComponent(); }
     }
 }

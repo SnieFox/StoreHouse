@@ -9,21 +9,23 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using StoreHouse.Model.DbContext.Methods;
 using StoreHouse.Model.OutputDataModels;
+using StoreHouse.Model.DbContext.Methods;
+using StoreHouse.ViewModels.ManadeDbViewModels.MenuPagesViewModels;
 
 namespace StoreHouse.ViewModels.ManadeDbViewModels
 {
-    class AddIngredientToDishViewModel : INotifyPropertyChanged
+    internal class EditIngredientInDishViewModel : INotifyPropertyChanged
     {
         private IMainWindowsCodeBehind _MainCodeBehind;
 
-        public AddIngredientToDishViewModel(IMainWindowsCodeBehind codeBehind)
+        public EditIngredientInDishViewModel(IMainWindowsCodeBehind codeBehind)
         {
             if (codeBehind == null) throw new ArgumentNullException(nameof(codeBehind));
 
             _MainCodeBehind = codeBehind;
         }
+        public EditIngredientInDishViewModel(){}
 
 
 
@@ -35,7 +37,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
             set
             {
                 _Count = value;
-                Sum = Math.Round(DbUsage.GetSum(DbUsage.GetPrimeCost(DbUsage.GetIngredientIdByName(SeletedProduct), SeletedProduct), _Count),2);
+                Sum = Math.Round(DbUsage.GetSum(DbUsage.GetPrimeCost(DbUsage.GetIngredientIdByName(SeletedProduct), SeletedProduct), _Count), 2);
                 OnPropertyChanged();
             }
         }
@@ -72,6 +74,21 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
                 _ProductList = value;
             }
         }
+        private static List<OutputAddDish> _OutputAddDishesIngredients = new();/* = DbUsage.GetAllDishIngById(DbUsage.GetDishId(DbUsage.GetAllDishes()));*/
+        public List<OutputAddDish> OutputAddDishesIngredients
+        {
+            get => _OutputAddDishesIngredients;
+            set
+            {
+                _OutputAddDishesIngredients = value;
+                OnPropertyChanged();
+            }
+        }
+        public static List<OutputAddDish> GetAddDishesList() => _OutputAddDishesIngredients;
+        public static void SetAddDishesList(OutputAddDish list)
+        {
+            _OutputAddDishesIngredients.Add(list);
+        }
 
         // Commands
         // Комманда добавления Списания
@@ -84,10 +101,31 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
                 {
                     try
                     {
-                        AddDishViewModel.SetAddDishesList(new OutputAddDish(SeletedProduct,
+                        SetAddDishesList(new OutputAddDish(SeletedProduct,
                             $"{Count}кг",
                             Math.Round(Sum, 2).ToString()));
-                        _MainCodeBehind.LoadView(ViewType.AddDish);
+
+                        EditDb editPC = new EditDb();
+                        editPC.EditDishPrimeCost(
+                            DbUsage.GetDishIdByName(DishesUCViewModel.GetChoosenDishItem().Name),
+                            Convert.ToString(
+                                DbUsage.GetPrimeCost(DbUsage.GetIngredientIdByName(SeletedProduct), SeletedProduct)),
+                            _Count
+                            );
+
+                        foreach (var ingr in OutputAddDishesIngredients)
+                        {
+                            AddToDb addingrToDb = new AddToDb();
+                            addingrToDb.AddOutputAddDish(
+                                DbUsage.GetDishIdByName(DishesUCViewModel.GetChoosenDishItem().Name),
+                                ingr.Name,
+                                ingr.Count,
+                                ingr.Sum
+                            );
+                        }
+
+                        EditDishViewModel.SetAllDishesIngredients(DbUsage.GetDishIngredientList());
+                        _MainCodeBehind.LoadView(ViewType.EditDishes);
                     }
                     catch (Exception e)
                     {
@@ -97,7 +135,6 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
                 });
             }
         }
-        /// Переход ко WriteOff вьюшке
 
         private RelayCommand _LoadAddDishUCCommand;
         public RelayCommand LoadAddDishUCCommand
@@ -109,8 +146,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
                     Count = "";
                     Sum = 0;
                     SeletedProduct = "";
-                    IngredientsUCViewModel.SetAllIngredients();
-                    _MainCodeBehind.LoadView(ViewType.AddDish);
+                    _MainCodeBehind.LoadView(ViewType.EditDishes);
                 });
             }
         }
@@ -125,4 +161,5 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
         #endregion
 
     }
+   
 }

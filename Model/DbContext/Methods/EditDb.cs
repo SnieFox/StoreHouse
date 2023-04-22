@@ -221,6 +221,77 @@ namespace StoreHouse.Model.DbContext.Methods
 
             return result;
         }
+        public string EditIngredientPrimeCost(int ingredientId, string newPrimeCost)
+        {
+            string result = "Готово!";
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                var ingr = (from ingredient in db.Ingredients
+                    where ingredient.Id == ingredientId
+                    select ingredient).FirstOrDefault();
+
+                ingr.PrimeCost = Convert.ToDecimal(newPrimeCost.Replace('.', ','));
+                db.SaveChanges();
+            }
+            return result;
+        }
+        public string EditDishPrimeCost(int dishId, string newPrimeCost, string count)
+        {
+            string result = "Готово!";
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                var ingr = (from dish in db.Dishes
+                    where dish.Id == dishId
+                            select dish).FirstOrDefault();
+
+                decimal tempPrimeCost = Convert.ToDecimal(newPrimeCost.Replace('.', ',')) *
+                                        Convert.ToDecimal(count.Replace('.', ','));
+                ingr.PrimeCost += tempPrimeCost;
+                db.SaveChanges();
+            }
+            return result;
+        }
+        public string EditDishPrice(int dishId, string newPrice)
+        {
+            string result = "Готово!";
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                var ingr = (from dish in db.Dishes
+                    where dish.Id == dishId
+                    select dish).FirstOrDefault();
+
+                ingr.Sum = Math.Round(Convert.ToDecimal(newPrice.Replace('.', ',')),2);
+                db.SaveChanges();
+            }
+            return result;
+        }
+
+        public string EditDishIngredientCount(int dishId,string name, string newCount)
+        {
+            string result = "Готово!";
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                var ingr = (from dish in db.OutputAddDishes
+                    where dish.DishId == dishId && dish.Name == name
+                    select dish).FirstOrDefault();
+
+                ingr.Count = $"{newCount}{DbUsage.GetIngredientUnitByName(name)}";
+                ingr.Sum =
+                    $"{Math.Round(Convert.ToDouble(DbUsage.GetPrimeCost(DbUsage.GetIngredientIdByName(ingr.Name), ingr.Name)) * Convert.ToDouble(newCount.Replace('.', ',')),2)}";
+                db.SaveChanges();
+            }
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                var dishes = (from dshes in db.Dishes
+                    where dshes.Id == dishId
+                    select dshes).FirstOrDefault();
+
+                dishes.PrimeCost = Convert.ToDecimal(DbUsage.GetPrimeCost(DbUsage.GetDishIngredientList(dishId)));
+                db.SaveChanges();
+            }
+            return result;
+        }
+
 
 
     }

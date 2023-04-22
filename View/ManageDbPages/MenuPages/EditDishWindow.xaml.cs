@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace StoreHouse.View.ManageDbPages.MenuPages
 {
     /// <summary>
-    /// Логика взаимодействия для DetailsWriteOffWindow.xaml
+    /// Логика взаимодействия для EditDishWindow.xaml
     /// </summary>
-    public partial class DetailsWriteOffWindow : UserControl
+    public partial class EditDishWindow : UserControl
     {
-        public DetailsWriteOffWindow()
+        public EditDishWindow()
         {
             InitializeComponent();
         }

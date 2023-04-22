@@ -5,10 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StoreHouse.View"
         xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:ViewModels="clr-namespace:StoreHouse.ViewModels" x:Class="StoreHouse.View.RemainsUC"
+        xmlns:vm="clr-namespace:StoreHouse.ViewModels" x:Class="StoreHouse.View.RemainsUC"
         mc:Ignorable="d"
         d:DesignHeight="700" d:DesignWidth="1060"
         Background="AliceBlue">
+    <UserControl.DataContext>
+        <vm:RemainsUCViewModel/>
+    </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="6.97*"/>
@@ -17,19 +20,19 @@
         </Grid.RowDefinitions>
         <StackPanel Margin="10" Orientation="Horizontal" Grid.Row="0">
             <TextBlock VerticalAlignment="Center" FontWeight="Regular" FontSize="20"><Run Text="Залишки"/></TextBlock>
-            <TextBlock Margin="9,3,0,0" VerticalAlignment="Center" Foreground="#ACACAC" FontSize="16"><Run Text="51"/></TextBlock>
+            <TextBlock Text="{Binding RemainsCount, UpdateSourceTrigger=PropertyChanged}" Margin="9,3,0,0" VerticalAlignment="Center" Foreground="#ACACAC" FontSize="16"></TextBlock>
         </StackPanel>
         <StackPanel Margin="10" Orientation="Horizontal" Grid.Row="1">
-            <Button Height="30" Width="30" Background="White">
+            <Button Command="{Binding SearchButtonCommand}" Height="30" Width="30" Background="White">
                 <Image Height="25" Width="25" Source="../../Images/Search image.png"/>
             </Button>
-            <TextBox Height="30" Width="164"/>
+            <TextBox FontWeight="SemiBold" FontSize="16" VerticalContentAlignment="Center" Text="{Binding SearchBar, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="164"/>
             <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium"><Run Text="Тип"/></TextBlock>
             <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium"><Run Text="Категорія"/></TextBlock>
             <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium"><Run Text="Фільтр"/></TextBlock>
         </StackPanel>
         <ScrollViewer Grid.Row="2">
-            <DataGrid SelectedItem="{Binding ChosenRemainsItem, UpdateSourceTrigger=PropertyChanged}" Foreground="#818181" FontSize="16" FontWeight="Medium" x:Name="RemainsDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid ItemsSource="{Binding AllRemains, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding ChosenRemainsItem, UpdateSourceTrigger=PropertyChanged}" Foreground="#818181" FontSize="16" FontWeight="Medium" x:Name="RemainsDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.ContextMenu>
                     <ContextMenu>
                         <MenuItem BorderThickness="0" Background="Transparent" FontSize="16" FontWeight="Medium" Foreground="#30BCC5" Header="Постачання" Command="{Binding LoadIngredientSuppliesCommand}"></MenuItem>

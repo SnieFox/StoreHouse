@@ -22,13 +22,34 @@ namespace StoreHouse.ViewModels.ViewSettingMethods
                 List<OutputWriteOff> dataList = new List<OutputWriteOff>();
                 foreach (var temp in tempList)
                 {
-                    dataList.Add(new OutputWriteOff(temp.Date, temp.Product, $"{Math.Round(temp.Sum,2)}грн", temp.Cause));
+                    if (temp.DishId == null && temp.IngredientId == null)
+                    {
+                        dataList.Add(new OutputWriteOff($"{temp.Count}{DbUsage.GetIngredientUnitByName(temp.Product)}", -1, temp.Date, temp.Product,
+                            $"{Math.Round(temp.Sum, 2)}грн",
+                            temp.Cause));
+                    }
+                    else if (temp.DishId != null)
+                    {
+                        dataList.Add(new OutputWriteOff($"{temp.Count}{DbUsage.GetIngredientUnitByName(temp.Product)}",(int)temp.DishId, temp.Date, temp.Product,
+                            $"{Math.Round(temp.Sum, 2)}грн",
+                            temp.Cause));
+                    }
+                    else
+                    {
+                        dataList.Add(new OutputWriteOff($"{temp.Count}{DbUsage.GetIngredientUnitByName(temp.Product)}", temp.Date, temp.Product, $"{Math.Round(temp.Sum, 2)}грн",
+                            temp.Cause, (int)temp.IngredientId));
+                    }
                 }
+
                 return dataList;
             }
             catch (SqlNullValueException e)
             {
                 return new List<OutputWriteOff>();
+            }
+            catch (Exception ex)
+            {
+                throw;
             }
         }
         public static List<OutputSupplies> GetOutputSupplies()

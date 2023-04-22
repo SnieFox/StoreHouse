@@ -167,6 +167,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
                             Comment,
                             Sum
                         );
+                        SuppliesUCViewModel.SetAllSupplies();
                         _MainCodeBehind.LoadView(ViewType.Supplies);
                     }
                     catch (Exception e)
@@ -189,6 +190,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
                     _Count = "";
                     _Sum = 0;
                     _PrimeCost = "";
+                    SuppliesUCViewModel.SetAllSupplies();
                     _MainCodeBehind.LoadView(ViewType.Supplies);
                 });
             }

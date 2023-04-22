@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using StoreHouse.Model.Models;
 using StoreHouse.Model.OutputDataModels;
 
@@ -70,6 +71,7 @@ namespace StoreHouse.Model.DbContext.Methods
                         ingr.CurrentRemains = Convert.ToString(tempRemains + (decTempCountSplit * decTempIngrCountSplit));
                         ingr.Sum = Math.Round(DbUsage.GetSum(Convert.ToString(ingr.PrimeCost), ingr.CurrentRemains), 2);
 
+                        db.Entry(ingr).State = EntityState.Modified;
                     }
                     db.WriteOffs.Remove(writeOff);
                     db.SaveChanges();
@@ -86,12 +88,75 @@ namespace StoreHouse.Model.DbContext.Methods
                     ingr.Sum = Math.Round(DbUsage.GetSum(Convert.ToString(ingr.PrimeCost), ingr.CurrentRemains), 2);
 
                     db.WriteOffs.Remove(writeOff);
+                    db.Entry(ingr).State = EntityState.Modified;
                     db.SaveChanges();
                 }
             }
 
             return result;
         }
+        public string DeleteDishIngr(int dishIngId)
+        {
+            string result = "Готово!";
+            OutputAddDish dishIngr;
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+
+                dishIngr = (from dish in db.OutputAddDishes
+                    where dish.Id == dishIngId
+                    select dish).FirstOrDefault();
+                db.OutputAddDishes.Remove(dishIngr);
+                db.SaveChanges();
+            }
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                var dish = (from dishes in db.Dishes
+                    where dishes.Id == dishIngr.DishId
+                            select dishes).FirstOrDefault();
+                dish.PrimeCost = Convert.ToDecimal(DbUsage.GetPrimeCost(DbUsage.GetDishIngredientList(dish.Id)));
+                db.SaveChanges();
+            }
+            
+
+            return result;
+        }
+        public string DeleteDish(int dishId)
+        {
+            string result = "Готово!";
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                var dish = (from dishes in db.OutputAddDishes
+                    where dishes.DishId == dishId
+                            select dishes).ToList();
+                foreach (var dh in dish)
+                {
+                    db.OutputAddDishes.Remove(dh);
+                }
+                db.SaveChanges();
+            }
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+
+                var writeOff = (from wrOff in db.WriteOffs
+                    where wrOff.DishId == dishId
+                    select wrOff).ToList();
+                foreach (var wr in writeOff)
+                {
+                    db.WriteOffs.Remove(wr);
+                }
+                db.SaveChanges();
+            }
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                var dish = (from dishes in db.Dishes
+                    where dishes.Id == dishId
+                    select dishes).FirstOrDefault();
+                db.Dishes.Remove(dish);
+                db.SaveChanges();
+            }
+            return result;
+        }
+
 
     }
 }

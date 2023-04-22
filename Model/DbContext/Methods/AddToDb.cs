@@ -176,17 +176,6 @@ namespace StoreHouse.Model.DbContext.Methods
                         id.CurrentRemains = Convert.ToString(tempRemains - (decTempCountSplit*decTempIngrCountSplit));
                         id.Sum = Math.Round(DbUsage.GetSum(Convert.ToString(id.PrimeCost), id.CurrentRemains), 2);
                     }
-                    foreach (var id in ingr)
-                    {
-                        string[] tempRemainsSplit = id.CurrentRemains.Split(' ');
-                        string[] tempCountSplit = dIng.Count.Split('к');
-                        decimal decTempCountSplit = Convert.ToDecimal(count.Replace('.', ','));
-                        decimal decTempIngrCountSplit = Convert.ToDecimal(tempCountSplit[0].Replace('.', ','));
-                        decimal tempRemains = Convert.ToDecimal(tempRemainsSplit[0].Replace('.', ','));
-                        id.CurrentRemains = Convert.ToString(tempRemains - (decTempCountSplit * decTempIngrCountSplit));
-                        id.Sum = Math.Round(DbUsage.GetSum(Convert.ToString(id.PrimeCost), id.CurrentRemains), 2);
-                    }
-
                 }
                 db.SaveChanges();
             }

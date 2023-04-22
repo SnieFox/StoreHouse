@@ -160,14 +160,24 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
                         }
 
                         //AddDishViewModel.SetAddDishesList(DbUsage.GetAllDishIngById(DbUsage.GetDishId(DbUsage.GetAllDishes())));
+                        DishesUCViewModel.SetDishesCount();
+                        DishesUCViewModel.SetAllDishes();
                         _MainCodeBehind.LoadView(ViewType.Dishes);
                     }
                     catch (FormatException e)
                     {
+                        DishesUCViewModel.SetDishesCount();
+                        DishesUCViewModel.SetAllDishes();
                         _MainCodeBehind.LoadView(ViewType.Dishes);
                     }
                     catch (Exception e)
                     {
+                        _OutputAddDishesIngredients = null;
+                        _Price = "";
+                        _PrimeCost = "";
+                        _SelectedCategory = "";
+                        _SelectedType = "";
+                        _Name = "";
                         MessageBox.Show("Щось пішло не так! Перевірте правильність заповнення форми.");
                     }
                 });
@@ -181,6 +191,8 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
             {
                 return _LoadDishesUCCommand ?? new RelayCommand(obj =>
                 {
+                    DishesUCViewModel.SetDishesCount();
+                    DishesUCViewModel.SetAllDishes();
                     _MainCodeBehind.LoadView(ViewType.Dishes);
                 });
             }
@@ -194,6 +206,8 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
             {
                 return _LoadAddIngredientToDishCommand ?? new RelayCommand(obj =>
                 {
+                    DishesUCViewModel.SetDishesCount();
+                    DishesUCViewModel.SetAllDishes();
                     _MainCodeBehind.LoadView(ViewType.AddIngredientToDish);
                 });
             }

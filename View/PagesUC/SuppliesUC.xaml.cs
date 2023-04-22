@@ -25,8 +25,6 @@ namespace StoreHouse.View
         public SuppliesUC()
         {
             InitializeComponent();
-            SuppliesDataGrid.ItemsSource = ViewSettings.GetOutputSupplies();
-
         }
     }
 }

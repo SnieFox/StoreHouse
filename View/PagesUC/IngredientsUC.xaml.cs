@@ -25,8 +25,6 @@ namespace StoreHouse.View
         public IngredientsUC()
         {
             InitializeComponent();
-            IngredientsDataGrid.ItemsSource = ViewSettings.GetOutputIngredients();
-
         }
     }
 }

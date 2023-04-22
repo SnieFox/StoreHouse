@@ -1,6 +1,8 @@
 ﻿using StoreHouse.Model.Commands;
+using StoreHouse.Model.DbContext;
 using StoreHouse.Model.OutputDataModels;
 using StoreHouse.ViewModels.Interfaces;
+using StoreHouse.ViewModels.ViewSettingMethods;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,9 +25,31 @@ namespace StoreHouse.ViewModels
 
             _MainCodeBehind = codeBehind;
         }
+        public SuppliesUCViewModel(){}
 
-
+        private static string _SearchBar;
+        public string SearchBar
+        {
+            get => _SearchBar;
+            set
+            {
+                _SearchBar = value;
+                OnPropertyChanged();
+            }
+        }
         // ChosenRemainsItem Field
+        private static List<OutputSupplies> _AllSupplies = ViewSettings.GetOutputSupplies();
+        public List<OutputSupplies> AllSupplies
+        {
+            get => _AllSupplies;
+            set
+            {
+                _AllSupplies = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public static void SetAllSupplies() => _AllSupplies = ViewSettings.GetOutputSupplies();
         private static OutputSupplies _ChoosenSupplyItem;
         public OutputSupplies ChoosenSupplyItem
         {
@@ -36,7 +60,18 @@ namespace StoreHouse.ViewModels
                 OnPropertyChanged();
             }
         }
+        private static string _SuppliesCount = Convert.ToString(DbUsage.GetAllSupplies().Count);
+        public string SuppliesCount
+        {
+            get => _SuppliesCount;
+            set
+            {
+                _SuppliesCount = value;
+                OnPropertyChanged();
+            }
+        }
 
+        public static void SetSuppliesCount() => _SuppliesCount = Convert.ToString(DbUsage.GetAllSupplies().Count);
         public static OutputSupplies GetChoosenSupplyItem()
         {
             return _ChoosenSupplyItem;
@@ -63,6 +98,17 @@ namespace StoreHouse.ViewModels
                 return _LoadEditSupplyCommand ?? new RelayCommand(obj =>
                 {
                     _MainCodeBehind.LoadView(ViewType.EditSupply);
+                });
+            }
+        }
+        private RelayCommand _SearchButtonCommand;
+        public RelayCommand SearchButtonCommand
+        {
+            get
+            {
+                return _SearchButtonCommand ?? new RelayCommand(obj =>
+                {
+                    AllSupplies = DbUsage.SearchSuppliesByName(SearchBar);
                 });
             }
         }

@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="StoreHouse.View.ManageDbPages.MenuPages.EditWriteOffIngredientWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StoreHouse.View.ManageDbPages.MenuPages"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="1060"
+        Background="AliceBlue">
+    <DockPanel>
+        <TabControl>
+            <TabItem Height="40" FontSize="15" FontWeight="SemiBold" Header="Списання Інгредієнту">
+                <Grid VerticalAlignment="Center" Height="700" Margin="10,0,0,0">
+                    <Grid.Background>
+                        <ImageBrush Opacity="50" ImageSource="/Images/Иконки.png"></ImageBrush>
+                    </Grid.Background>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="108*"></RowDefinition>
+                        <RowDefinition Height="95*"></RowDefinition>
+                        <RowDefinition Height="140*"></RowDefinition>
+                        <RowDefinition Height="88*"></RowDefinition>
+                        <RowDefinition Height="154*"></RowDefinition>
+                        <RowDefinition Height="115"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Margin="150,0,0,0" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="34">Найменування</TextBlock>
+                    <Border Margin="100,45,0,34" Grid.Row="0" BorderThickness="2" HorizontalAlignment="Left" Width="200" BorderBrush="#000" Grid.Column="1">
+                        <ComboBox ItemsSource="{Binding IngredientsList, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SeletedIngredient, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="30" Width="200"></ComboBox>
+                    </Border>
+
+                    <TextBlock Margin="150,0,0,0" Grid.Row="1" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="33">Кількість (кг\шт\л)</TextBlock>
+                    <TextBox Margin="50,0,0,0" Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2" BorderBrush="#000" Height="30" Width="400"></TextBox>
+
+                    <TextBlock Margin="150,0,0,0" Grid.Row="2" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="32">Коментар</TextBlock>
+                    <TextBox Margin="50,0,0,0" Text="{Binding Cause, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="2" BorderBrush="#000" Height="112" Width="400"></TextBox>
+
+                    <TextBlock Margin="150,0,0,0" Grid.Row="3" Grid.Column="0" Foreground="#000" VerticalAlignment="Center" FontSize="25" FontWeight="Medium" Height="32">Сума (грн)</TextBlock>
+                    <Border BorderBrush="Black" BorderThickness="2" Margin="50,0,0,0" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Height="30" Width="200">
+                        <TextBlock Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                    </Border>
+
+                    <StackPanel  Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="315,1,0,0" Width="430" Grid.RowSpan="2">
+                        <Button Command="{Binding EditWriteOffIngredientCommand, UpdateSourceTrigger=PropertyChanged}" Height="50" BorderThickness="1" BorderBrush="#F3F3F3" FontSize="20" FontWeight="Medium" Background="#30BCC5" Width="200">Змінити Списання</Button>
+                        <Button Command="{Binding DeleteWriteOffCommand, UpdateSourceTrigger=PropertyChanged }" Height="50" BorderThickness="1" BorderBrush="#F3F3F3" FontSize="20" FontWeight="Medium" Background="#30BCC5" Width="200" Margin="30,0,0,0">Видалити Списання</Button>
+                    </StackPanel>
+                    <Button Grid.ColumnSpan="2" Grid.Row="4" Command="{Binding LoadWriteOffUCCommand, UpdateSourceTrigger=PropertyChanged}" Height="50" BorderThickness="1" BorderBrush="#F3F3F3" FontSize="20" FontWeight="Medium" Background="#30BCC5" Width="200" Margin="430,77,414,27">Назад</Button>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</UserControl>
+

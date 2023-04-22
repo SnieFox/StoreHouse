@@ -25,7 +25,6 @@ namespace StoreHouse.View
         public RemainsUC()
         {
             InitializeComponent();
-            RemainsDataGrid.ItemsSource = ViewSettings.GetOutputIngredients();
         }
     }
 }

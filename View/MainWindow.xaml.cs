@@ -40,8 +40,15 @@ namespace StoreHouse
         AddIngredientToDish,
         IngredientSupply,
         EditSupply,
-        EditWriteOff,
-        DetailsWriteOff
+        EditWriteOffIngredient,
+        EditWriteOffDish,
+        DetailsWriteOffIngredient,
+        DetailsWriteOffDish,
+        ChangePrimeCost,
+        EditDishes,
+        DetailsDishes,
+        EditCountInDishIngr,
+        EditIngredientInDish
     }
     public partial class MainWindow : Window, IMainWindowsCodeBehind
     {
@@ -149,17 +156,59 @@ namespace StoreHouse
                     viewEditSupplyWindow.DataContext = vmEditSupplyWindow;
                     this.OutputView.Content = viewEditSupplyWindow;
                     break;
-                case ViewType.EditWriteOff:
-                    EditWriteOffWindow viewEditWriteOffWindow = new EditWriteOffWindow();
-                    EditWriteOffViewModel vmEditWriteOffWindow = new EditWriteOffViewModel(this);
-                    viewEditWriteOffWindow.DataContext = vmEditWriteOffWindow;
-                    this.OutputView.Content = viewEditWriteOffWindow;
+                case ViewType.EditWriteOffIngredient:
+                    EditWriteOffIngredientWindow viewEditWriteOffIngredientWindow = new EditWriteOffIngredientWindow();
+                    EditWriteOffViewModel vmEditWriteOffIngredientWindow = new EditWriteOffViewModel(this);
+                    viewEditWriteOffIngredientWindow.DataContext = vmEditWriteOffIngredientWindow;
+                    this.OutputView.Content = viewEditWriteOffIngredientWindow;
                     break;
-                case ViewType.DetailsWriteOff:
-                    DetailsWriteOffWindow viewDetailsWriteOffWindow = new DetailsWriteOffWindow();
-                    DetailsWriteOffViewModel vmDetailsWriteOffWindow = new DetailsWriteOffViewModel(this);
-                    viewDetailsWriteOffWindow.DataContext = vmDetailsWriteOffWindow;
-                    this.OutputView.Content = viewDetailsWriteOffWindow;
+                case ViewType.EditWriteOffDish:
+                    EditWriteOffDishWindow viewEditWriteOffDishWindow = new EditWriteOffDishWindow();
+                    EditWriteOffViewModel vmEditWriteOffDishWindow = new EditWriteOffViewModel(this);
+                    viewEditWriteOffDishWindow.DataContext = vmEditWriteOffDishWindow;
+                    this.OutputView.Content = viewEditWriteOffDishWindow;
+                    break;
+                case ViewType.DetailsWriteOffIngredient:
+                    DetailsWriteOffIngredientWindow viewDetailsWriteOffIngredientWindow = new DetailsWriteOffIngredientWindow();
+                    DetailsWriteOffIngredientViewModel vmDetailsWriteOffIngredientWindow = new DetailsWriteOffIngredientViewModel(this);
+                    viewDetailsWriteOffIngredientWindow.DataContext = vmDetailsWriteOffIngredientWindow;
+                    this.OutputView.Content = viewDetailsWriteOffIngredientWindow;
+                    break;
+                case ViewType.DetailsWriteOffDish:
+                    DetailsWriteOffDishWindow viewDetailsWriteOffDishWindow = new DetailsWriteOffDishWindow();
+                    DetailsWriteOffDishViewModel vmDetailsWriteOffDishWindow = new DetailsWriteOffDishViewModel(this);
+                    viewDetailsWriteOffDishWindow.DataContext = vmDetailsWriteOffDishWindow;
+                    this.OutputView.Content = viewDetailsWriteOffDishWindow;
+                    break;
+                case ViewType.ChangePrimeCost:
+                    ChangePrimeCostWindow viewChangePrimeCostWindow = new ChangePrimeCostWindow();
+                    IngredientsUCViewModel vmChangePrimeCostWindow = new IngredientsUCViewModel(this);
+                    viewChangePrimeCostWindow.DataContext = vmChangePrimeCostWindow;
+                    this.OutputView.Content = viewChangePrimeCostWindow;
+                    break;
+                case ViewType.EditDishes:
+                    EditDishWindow viewEditDishesWindow = new EditDishWindow();
+                    EditDishViewModel vmEditDishesWindow = new EditDishViewModel(this);
+                    viewEditDishesWindow.DataContext = vmEditDishesWindow;
+                    this.OutputView.Content = viewEditDishesWindow;
+                    break;
+                case ViewType.DetailsDishes:
+                    DetailsDishWindow viewDetailsDishesWindow = new DetailsDishWindow();
+                    DetailsDishViewModel vmDetailsDishesWindow = new DetailsDishViewModel(this);
+                    viewDetailsDishesWindow.DataContext = vmDetailsDishesWindow;
+                    this.OutputView.Content = viewDetailsDishesWindow;
+                    break;
+                case ViewType.EditCountInDishIngr:
+                    EditCountIngInDish viewEditCountInDishIngrWindow = new EditCountIngInDish();
+                    EditDishViewModel vmEditCountInDishIngrWindow = new EditDishViewModel(this);
+                    viewEditCountInDishIngrWindow.DataContext = vmEditCountInDishIngrWindow;
+                    this.OutputView.Content = viewEditCountInDishIngrWindow;
+                    break;
+                case ViewType.EditIngredientInDish:
+                    EditIngredientInDishWindow viewEditIngredientInDishWindow = new EditIngredientInDishWindow();
+                    EditIngredientInDishViewModel vmEditIngredientInDishWindow = new EditIngredientInDishViewModel(this);
+                    viewEditIngredientInDishWindow.DataContext = vmEditIngredientInDishWindow;
+                    this.OutputView.Content = viewEditIngredientInDishWindow;
                     break;
             }
 

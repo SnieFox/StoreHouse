@@ -13,13 +13,13 @@ using StoreHouse.Model.DbContext.Methods;
 
 namespace StoreHouse.ViewModels.ManadeDbViewModels.MenuPagesViewModels
 {
-    internal class EditWriteOffViewModel : INotifyPropertyChanged
+    internal class EditWriteOffDishViewModel : INotifyPropertyChanged
     {
         //Fields
         private IMainWindowsCodeBehind _MainCodeBehind;
 
         //ctor
-        public EditWriteOffViewModel(IMainWindowsCodeBehind codeBehind)
+        public EditWriteOffDishViewModel(IMainWindowsCodeBehind codeBehind)
         {
             if (codeBehind == null) throw new ArgumentNullException(nameof(codeBehind));
 
@@ -203,21 +203,28 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels.MenuPagesViewModels
                 {
                     try
                     {
-                        EditDb edit = new EditDb();
+                        if (WriteOffsUCViewModel.GetChoosenWriteOffItem().DishId != -1)
                         {
-                            edit.EditWriteOffDish(
-                                DbUsage.GetWriteOffIdByName(WriteOffsUCViewModel.GetChoosenWriteOffItem().Product),
-                                DbUsage.GetDishIdByName(SeletedDish),
-                                SeletedDish,
-                                DishCount,
-                                DishSum,
-                                Cause);
+                            EditDb edit = new EditDb();
+                            {
+                                edit.EditWriteOffDish(
+                                    DbUsage.GetWriteOffIdByName(WriteOffsUCViewModel.GetChoosenWriteOffItem().Product),
+                                    DbUsage.GetDishIdByName(SeletedDish),
+                                    SeletedDish,
+                                    DishCount,
+                                    DishSum,
+                                    Cause);
+                            }
+                            _Count = "";
+                            _SeletedIngredient = null;
+                            _Sum = 0;
+                            WriteOffsUCViewModel.SetAllWriteOffs();
+                            _MainCodeBehind.LoadView(ViewType.WriteOffs);
                         }
-                        _Count = "";
-                        _SeletedIngredient = null;
-                        _Sum = 0;
-                        WriteOffsUCViewModel.SetAllWriteOffs();
-                        _MainCodeBehind.LoadView(ViewType.WriteOffs);
+                        else
+                        {
+                            MessageBox.Show("Недоступно, страва була видалена");
+                        }
                     }
                     catch (Exception e)
                     {

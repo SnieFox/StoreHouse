@@ -125,6 +125,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
                             Math.Round(Convert.ToDecimal(_PrimeCost.Replace('.', ',')), 2),
                             Math.Round(DbUsage.GetSum(_PrimeCost, _CurrentRemains), 2),
                             _SelectedType);
+                        IngredientsUCViewModel.SetAllIngredients();
                             _MainCodeBehind.LoadView(ViewType.Ingredients);
                     }
                     catch (Exception e)
@@ -145,6 +146,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
             {
                 return _LoadIngredientsUCCommand ?? new RelayCommand(obj =>
                 {
+                    IngredientsUCViewModel.SetAllIngredients();
                     _MainCodeBehind.LoadView(ViewType.Ingredients);
                 });
             }

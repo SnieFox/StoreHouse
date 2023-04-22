@@ -10,6 +10,8 @@ using StoreHouse.Model;
 using StoreHouse.Model.Models;
 using System.Runtime.CompilerServices;
 using StoreHouse.Model.OutputDataModels;
+using StoreHouse.Model.DbContext;
+using StoreHouse.ViewModels.ViewSettingMethods;
 
 namespace StoreHouse.ViewModels
 {
@@ -26,7 +28,30 @@ namespace StoreHouse.ViewModels
             _MainCodeBehind = codeBehind;
         }
 
+        public RemainsUCViewModel(){}
+
+
+        private static string _SearchBar;
+        public string SearchBar
+        {
+            get => _SearchBar;
+            set
+            {
+                _SearchBar = value;
+                OnPropertyChanged();
+            }
+        }
         // ChosenRemainsItem Field
+        private static List<OutputIngredient> _AllRemains = ViewSettings.GetOutputIngredients();
+        public List<OutputIngredient> AllRemains
+        {
+            get => _AllRemains;
+            set
+            {
+                _AllRemains = value;
+                OnPropertyChanged();
+            }
+        }
         private static OutputIngredient _ChosenRemainsItem;
         public OutputIngredient ChosenRemainsItem
         {
@@ -37,7 +62,18 @@ namespace StoreHouse.ViewModels
                 OnPropertyChanged();
             }
         }
+        private static string _RemainsCount = Convert.ToString(DbUsage.GetAllIngredients().Count);
+        public string RemainsCount
+        {
+            get => _RemainsCount;
+            set
+            {
+                _RemainsCount = value;
+                OnPropertyChanged();
+            }
+        }
 
+        public static void SetRemainsCount() => _RemainsCount = Convert.ToString(DbUsage.GetAllIngredients().Count);
         public static string GetChosenRemainsItemName()
         {
             return _ChosenRemainsItem.Name;
@@ -52,6 +88,18 @@ namespace StoreHouse.ViewModels
                 return _LoadIngredientSuppliesCommand ?? new RelayCommand(obj =>
                 {
                     _MainCodeBehind.LoadView(ViewType.IngredientSupply);
+                });
+            }
+        }
+
+        private RelayCommand _SearchButtonCommand;
+        public RelayCommand SearchButtonCommand
+        {
+            get
+            {
+                return _SearchButtonCommand ?? new RelayCommand(obj =>
+                {
+                    AllRemains = DbUsage.SearchIngredientsByName(SearchBar);
                 });
             }
         }

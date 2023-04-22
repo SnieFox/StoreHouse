@@ -147,6 +147,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
                             Sum,
                             Cause
                         );
+                        WriteOffsUCViewModel.SetAllWriteOffs();
                         _MainCodeBehind.LoadView(ViewType.WriteOffs);
                     }
                     catch (Exception e)
@@ -176,6 +177,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
                             DishSum,
                             Cause
                         );
+                        WriteOffsUCViewModel.SetAllWriteOffs();
                         _MainCodeBehind.LoadView(ViewType.WriteOffs);
                     }
                     catch (Exception e)
@@ -198,6 +200,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
                     _Count = "";
                     _Sum = 0;
                     _Cause = "";
+                    WriteOffsUCViewModel.SetAllWriteOffs();
                     _MainCodeBehind.LoadView(ViewType.WriteOffs);
                 });
             }

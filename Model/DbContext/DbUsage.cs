@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
+using System.Windows.Shell;
 using StoreHouse.Model.Models;
 using StoreHouse.Model.OutputDataModels;
+using StoreHouse.ViewModels;
 
 namespace StoreHouse.Model.DbContext
 {
@@ -28,6 +32,29 @@ namespace StoreHouse.Model.DbContext
                 var ingredients = db.Ingredients.ToList();
                 return ingredients;
             }
+        }
+        public static List<OutputAddDish> GetDishIngredientList()
+        {
+            List<OutputAddDish> list = DbUsage.GetAllDishIngById(DbUsage.GetDishIdByName(DishesUCViewModel.GetChoosenDishItem().Name));
+            List<OutputAddDish> returnList = new List<OutputAddDish>();
+            foreach (var dish in list)
+            {
+                string[] dishCountSplit = dish.Count.Split('к');
+                string dishCount = dishCountSplit[0];
+                returnList.Add(new OutputAddDish(dish.Name, $"{dishCount}{DbUsage.GetIngredientUnitByName(dish.Name)}", $"{dish.Sum}грн"));
+            }
+            return returnList;
+        }
+        public static List<OutputAddDish> GetDishIngredientList(int dishId)
+        {
+            List<OutputAddDish> dishList;
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                dishList = (from dish in db.OutputAddDishes
+                               where dish.DishId == dishId
+                                   select dish).ToList();
+            }
+            return dishList;
         }
         public static List<Supply> GetAllSupplies()
         {
@@ -50,6 +77,156 @@ namespace StoreHouse.Model.DbContext
 
             return id;
         }
+        public static int GetOutputAddDishesIdByName(string name, int dishId)
+        {
+            int id;
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                id = (from ingredient in db.OutputAddDishes
+                    where ingredient.Name == name && ingredient.DishId == dishId
+                    select ingredient.Id).FirstOrDefault();
+            }
+
+            return id;
+        }
+        public static List<Ingredient> GetIngredientsByName(string name)
+        {
+            List<Ingredient> IngList;
+            using (StoreHouseContext db = new StoreHouseContext())
+            {
+                IngList = (from ingredient in db.Ingredients
+                    where ingredient.Name == name
+                    select ingredient).ToList();
+            }
+
+            return IngList;
+        }
+        public static List<OutputIngredient> SearchIngredientsByName(string name)
+        {
+            try
+            {
+                List<Ingredient> IngList;
+                using (StoreHouseContext db = new StoreHouseContext())
+                {
+                    IngList = (from ingredient in db.Ingredients
+                        where ingredient.Name.Contains(name)
+                        select ingredient).ToList();
+                }
+                List<OutputIngredient> dataList = new List<OutputIngredient>();
+                foreach (var temp in IngList)
+                {
+                    var tempRemains = temp.CurrentRemains.Split(' ');
+                    dataList.Add(new OutputIngredient(temp.Name, temp.Unit,
+                        $"{Convert.ToString(Math.Round(Convert.ToDecimal(tempRemains[0].Replace('.', ',')), 2))}{temp.Unit}",
+                        $"{Math.Round(temp.PrimeCost, 2)}грн", $"{Math.Round(temp.Sum, 2)}грн", temp.Type));
+                }
+                return dataList;
+            }
+            catch (SqlNullValueException e)
+            {
+                return new List<OutputIngredient>();
+
+            }
+        }
+        public static List<OutputDish> SearchDishesByName(string name)
+        {
+            try
+            {
+                List<Dish> dishList;
+                using (StoreHouseContext db = new StoreHouseContext())
+                {
+                    dishList = (from dish in db.Dishes
+                        where dish.Name.Contains(name)
+                        select dish).ToList();
+                }
+                List<OutputDish> dataList = new List<OutputDish>();
+                foreach (var temp in dishList)
+                {
+                    dataList.Add(new OutputDish(
+                        temp.Name,
+                        temp.Type,
+                        temp.Category,
+                        $"{Math.Round(temp.PrimeCost, 2)}грн",
+                        $"{Math.Round(temp.Sum, 2)}грн"
+                        ));
+                }
+                return dataList;
+            }
+            catch (SqlNullValueException e)
+            {
+                return new List<OutputDish>();
+
+            }
+        }
+
+        public static List<OutputSupplies> SearchSuppliesByName(string name)
+        {
+            try
+            {
+                List<Supply> dishList;
+                using (StoreHouseContext db = new StoreHouseContext())
+                {
+                    dishList = (from supl in db.Supplies
+                        where supl.Product.Contains(name)
+                        select supl).ToList();
+                }
+                List<OutputSupplies> dataList = new List<OutputSupplies>();
+                foreach (var temp in dishList)
+                {
+                    dataList.Add(new OutputSupplies(
+                        Convert.ToString(temp.Id),
+                        temp.Date,
+                        temp.Supplier,
+                        temp.Product,
+                        temp.Comment,
+                        $"{Math.Round(temp.Sum, 2)}грн",
+                        $"{Convert.ToString(Math.Round(temp.Count, 2))}{DbUsage.GetIngredientUnitByName(temp.Product)}"
+                    ));
+                }
+                return dataList;
+            }
+            catch (SqlNullValueException e)
+            {
+                return new List<OutputSupplies>();
+
+            }
+        }
+        public static List<OutputWriteOff> SearchWriteOffsByName(string name)
+        {
+            try
+            {
+                List<WriteOff> dishList;
+                using (StoreHouseContext db = new StoreHouseContext())
+                {
+                    dishList = (from wrOff in db.WriteOffs
+                        where wrOff.Product.Contains(name)
+                        select wrOff).ToList();
+                }
+                List<OutputWriteOff> dataList = new List<OutputWriteOff>();
+                foreach (var temp in dishList)
+                {
+                    if (temp.DishId != null)
+                    {
+                        dataList.Add(new OutputWriteOff($"{temp.Count}{DbUsage.GetIngredientUnitByName(temp.Product)}", (int)temp.DishId, temp.Date, temp.Product,
+                            $"{Math.Round(temp.Sum, 2)}грн",
+                            temp.Cause));
+                    }
+                    else
+                    {
+                        dataList.Add(new OutputWriteOff($"{temp.Count}{DbUsage.GetIngredientUnitByName(temp.Product)}", temp.Date, temp.Product, $"{Math.Round(temp.Sum, 2)}грн",
+                            temp.Cause, (int)temp.IngredientId));
+                    }
+                }
+                return dataList;
+            }
+            catch (SqlNullValueException e)
+            {
+                return new List<OutputWriteOff>();
+
+            }
+        }
+
+
         public static int GetDishIdByName(string name)
         {
             int id;

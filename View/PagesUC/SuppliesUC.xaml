@@ -4,9 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StoreHouse.View"
+        xmlns:viewModels="clr-namespace:StoreHouse.ViewModels"
         mc:Ignorable="d"
         d:DesignHeight="700" d:DesignWidth="1060"
         Background="AliceBlue">
+    <UserControl.DataContext>
+        <viewModels:SuppliesUCViewModel/>
+    </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="6.97*"></RowDefinition>
@@ -15,20 +19,20 @@
         </Grid.RowDefinitions>
         <StackPanel Margin="10" Orientation="Horizontal" Grid.Row="0">
             <TextBlock VerticalAlignment="Center" FontWeight="Regular" FontSize="20">Постачання</TextBlock>
-            <TextBlock Margin="9,3,0,0" VerticalAlignment="Center" Foreground="#ACACAC" FontSize="16">51</TextBlock>
+            <TextBlock Text="{Binding SuppliesCount, UpdateSourceTrigger=PropertyChanged}" Margin="9,3,0,0" VerticalAlignment="Center" Foreground="#ACACAC" FontSize="16"></TextBlock>
         </StackPanel>
         <StackPanel Margin="10" Orientation="Horizontal" Grid.Row="1">
-            <Button Height="30" Width="30" Background="White">
+            <Button Command="{Binding SearchButtonCommand}" Height="30" Width="30" Background="White">
                 <Image Height="25" Width="25" Source="../../Images/Search image.png"/>
             </Button>
-            <TextBox Height="30" Width="164"/>
+            <TextBox FontWeight="SemiBold" FontSize="16" VerticalContentAlignment="Center" Text="{Binding SearchBar, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="164"/>
             <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="50,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Постачальник</TextBlock>
             <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Категорія</TextBlock>
             <TextBlock TextAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Фільтр</TextBlock>
             <Button Command="{Binding LoadAddSupplyCommand, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" BorderBrush="#30BCC5" Background="Transparent" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="350,0,0,0" Foreground="#30BCC5" FontSize="16" FontWeight="Medium">Додати постачання</Button>
         </StackPanel>
         <ScrollViewer  Grid.Row="2">
-            <DataGrid SelectedItem="{Binding ChoosenSupplyItem, UpdateSourceTrigger=PropertyChanged}" Foreground="#818181" FontSize="16" FontWeight="Medium" x:Name="SuppliesDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid ItemsSource="{Binding AllSupplies, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding ChoosenSupplyItem, UpdateSourceTrigger=PropertyChanged}" Foreground="#818181" FontSize="16" FontWeight="Medium" x:Name="SuppliesDataGrid" AutoGenerateColumns="False" IsReadOnly="True">
                 <DataGrid.ContextMenu>
                     <ContextMenu>
                         <MenuItem BorderThickness="0" Background="Transparent" FontSize="16" FontWeight="Medium" Foreground="#30BCC5" Header="Редагувати" Command="{Binding LoadEditSupplyCommand}"></MenuItem>

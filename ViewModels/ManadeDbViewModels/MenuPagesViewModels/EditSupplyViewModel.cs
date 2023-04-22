@@ -168,6 +168,8 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels.MenuPagesViewModels
                         _Count = "";
                         _NewSum = 0;
                         _NewPrimeCost = "";
+                        SuppliesUCViewModel.SetSuppliesCount();
+                        SuppliesUCViewModel.SetAllSupplies();
                         _MainCodeBehind.LoadView(ViewType.Supplies);
                     }
                     catch (Exception e)
@@ -205,6 +207,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels.MenuPagesViewModels
                         _Count = "";
                         _NewSum = 0;
                         _NewPrimeCost = "";
+                        SuppliesUCViewModel.SetAllSupplies();
                         _MainCodeBehind.LoadView(ViewType.Supplies);
                     }
                     catch (Exception e)
@@ -227,6 +230,8 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels.MenuPagesViewModels
                     _Count = "";
                     _NewSum = 0;
                     _NewPrimeCost = "";
+                    SuppliesUCViewModel.SetSuppliesCount();
+                    SuppliesUCViewModel.SetAllSupplies();
                     _MainCodeBehind.LoadView(ViewType.Supplies);
                 });
             }

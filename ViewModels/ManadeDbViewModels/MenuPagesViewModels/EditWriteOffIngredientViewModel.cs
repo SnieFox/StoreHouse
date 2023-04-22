@@ -1,6 +1,6 @@
 ﻿using StoreHouse.Model.Commands;
+using StoreHouse.Model.DbContext.Methods;
 using StoreHouse.Model.DbContext;
-using StoreHouse.ViewModels.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,17 +9,17 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using StoreHouse.Model.DbContext.Methods;
+using StoreHouse.ViewModels.Interfaces;
 
 namespace StoreHouse.ViewModels.ManadeDbViewModels.MenuPagesViewModels
 {
-    internal class EditWriteOffViewModel : INotifyPropertyChanged
+    internal class EditWriteOffIngredientViewModel : INotifyPropertyChanged
     {
         //Fields
         private IMainWindowsCodeBehind _MainCodeBehind;
 
         //ctor
-        public EditWriteOffViewModel(IMainWindowsCodeBehind codeBehind)
+        public EditWriteOffIngredientViewModel(IMainWindowsCodeBehind codeBehind)
         {
             if (codeBehind == null) throw new ArgumentNullException(nameof(codeBehind));
 
@@ -128,7 +128,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels.MenuPagesViewModels
         }
 
         //Commands
-
+       
         private RelayCommand _DeleteWriteOffCommand;
         public RelayCommand DeleteWriteOffCommand
         {
@@ -198,7 +198,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels.MenuPagesViewModels
         public RelayCommand EditWriteOffDishCommand
         {
             get
-            {
+             {
                 return _EditWriteOffDishCommand ?? new RelayCommand(obj =>
                 {
                     try

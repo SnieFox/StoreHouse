@@ -1,8 +1,5 @@
-﻿using StoreHouse.Model;
-using StoreHouse.ViewModels.ViewSettingMethods;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace StoreHouse.View
+namespace StoreHouse.View.ManageDbPages.MenuPages
 {
     /// <summary>
-    /// Логика взаимодействия для DishesUC.xaml
+    /// Логика взаимодействия для EditCountIngInDish.xaml
     /// </summary>
-    public partial class DishesUC
+    public partial class EditCountIngInDish : UserControl
     {
-        public DishesUC()
+        public EditCountIngInDish()
         {
             InitializeComponent();
         }
