@@ -298,7 +298,8 @@
                             </Expander>
                         </Grid>
                     </StackPanel>
-                    <StackPanel Grid.Row="2">
+                    <!--TODO-->
+                    <!--<StackPanel Grid.Row="2">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50"></ColumnDefinition>
@@ -313,7 +314,7 @@
                                 </StackPanel>
                             </Expander>
                         </Grid>
-                    </StackPanel>
+                    </StackPanel>-->
 
                 </Grid>
             </StackPanel>
