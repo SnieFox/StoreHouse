@@ -168,6 +168,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
                             Sum
                         );
                         SuppliesUCViewModel.SetAllSupplies();
+                        RemainsUCViewModel.SetAllRemains();
                         _MainCodeBehind.LoadView(ViewType.Supplies);
                     }
                     catch (Exception e)

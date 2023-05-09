@@ -201,6 +201,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels.MenuPagesViewModels
                     DishesUCViewModel.SetAllDishes();
                     WriteOffsUCViewModel.SetAllWriteOffs();
                     WriteOffsUCViewModel.SetWriteOffsCount();
+                    RemainsUCViewModel.SetAllRemains();
                     _MainCodeBehind.LoadView(ViewType.Dishes);
                 });
             }

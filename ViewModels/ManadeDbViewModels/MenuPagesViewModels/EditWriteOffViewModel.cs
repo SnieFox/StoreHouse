@@ -149,6 +149,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels.MenuPagesViewModels
                         _Cause = "";
                         WriteOffsUCViewModel.SetWriteOffsCount();
                         WriteOffsUCViewModel.SetAllWriteOffs();
+                        RemainsUCViewModel.SetAllRemains();
                         _MainCodeBehind.LoadView(ViewType.WriteOffs);
                     }
                     catch (Exception e)
@@ -183,6 +184,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels.MenuPagesViewModels
                         _SeletedIngredient = null;
                         _Sum = 0;
                         WriteOffsUCViewModel.SetAllWriteOffs();
+                        RemainsUCViewModel.SetAllRemains();
                         _MainCodeBehind.LoadView(ViewType.WriteOffs);
                     }
                     catch (Exception e)
@@ -217,6 +219,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels.MenuPagesViewModels
                         _SeletedIngredient = null;
                         _Sum = 0;
                         WriteOffsUCViewModel.SetAllWriteOffs();
+                        RemainsUCViewModel.SetAllRemains();
                         _MainCodeBehind.LoadView(ViewType.WriteOffs);
                     }
                     catch (Exception e)
@@ -241,6 +244,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels.MenuPagesViewModels
                     //_NewPrimeCost = "";
                     WriteOffsUCViewModel.SetWriteOffsCount();
                     WriteOffsUCViewModel.SetAllWriteOffs();
+                    RemainsUCViewModel.SetAllRemains();
                     _MainCodeBehind.LoadView(ViewType.WriteOffs);
                 });
             }

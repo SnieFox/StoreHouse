@@ -52,6 +52,7 @@ namespace StoreHouse.ViewModels
                 OnPropertyChanged();
             }
         }
+        public static void SetAllRemains() => _AllRemains = ViewSettings.GetOutputIngredients();
         private static OutputIngredient _ChosenRemainsItem;
         public OutputIngredient ChosenRemainsItem
         {

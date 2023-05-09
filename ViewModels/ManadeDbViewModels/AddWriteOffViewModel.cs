@@ -148,6 +148,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
                             Cause
                         );
                         WriteOffsUCViewModel.SetAllWriteOffs();
+                        RemainsUCViewModel.SetAllRemains();
                         _MainCodeBehind.LoadView(ViewType.WriteOffs);
                     }
                     catch (Exception e)
@@ -178,6 +179,7 @@ namespace StoreHouse.ViewModels.ManadeDbViewModels
                             Cause
                         );
                         WriteOffsUCViewModel.SetAllWriteOffs();
+                        RemainsUCViewModel.SetAllRemains();
                         _MainCodeBehind.LoadView(ViewType.WriteOffs);
                     }
                     catch (Exception e)
