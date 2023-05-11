@@ -14,7 +14,7 @@ namespace StoreHouse.Model
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-63ASIAM;Database=StoreHouse;Trusted_Connection=True; TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer(@"Server=DESKTOP-O510GJE;Database=StoreHouse;Trusted_Connection=True; TrustServerCertificate=True");
         }
 
         public DbSet<Ingredient> Ingredients { get; set; }
